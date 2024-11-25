@@ -1,48 +1,77 @@
 #### Preamble ####
-# Purpose: Simulates a dataset of Australian electoral divisions, including the 
-  # state and party that won each division.
-# Author: Rohan Alexander
-# Date: 26 September 2024
-# Contact: rohan.alexander@utoronto.ca
+# Purpose: Simulates a dataset of healthcare outbreak data
+# Author: Kevin Cai
+# Date: Dec 1, 2024
+# Contact: kev.cai@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: 
-  # - `polars` must be installed (pip install polars)
-  # - `numpy` must be installed (pip install numpy)
-
+# Pre-requisites:
+# - install requirements.txt Python libraries
 
 #### Workspace setup ####
-import polars as pl
+import pandas as pd
 import numpy as np
+
+num_data = 500
+
+# Set random seed for reproducibility
 np.random.seed(853)
 
-
 #### Simulate data ####
-# State names
-states = [
-    "New South Wales", "Victoria", "Queensland", "South Australia", 
-    "Western Australia", "Tasmania", "Northern Territory", 
-    "Australian Capital Territory"
+# Outbreak settings
+outbreak_settings = [
+    "Hospital-Chronic Care",
+    "Hospital-Psychiatric",
+    "LTCH",
+    "Retirement Home",
+    "Shelter",
+    "Transitional Care",
 ]
 
-# Political parties
-parties = ["Labor", "Liberal", "Greens", "National", "Other"]
+# Causative agent groups
+causative_agent_groups = [
+    "COVID-19",
+    "Enterovirus/Rhinovirus",
+    "Influenza",
+    "Metapneumovirus",
+    "Norovirus",
+    "Parainfluenza",
+    "Respiratory syncytial virus",
+]
 
-# Probabilities for state and party distribution
-state_probs = [0.25, 0.25, 0.15, 0.1, 0.1, 0.1, 0.025, 0.025]
-party_probs = [0.40, 0.40, 0.05, 0.1, 0.05]
-
-# Generate the data using numpy and polars
-divisions = [f"Division {i}" for i in range(1, 152)]
-states_sampled = np.random.choice(states, size=151, replace=True, p=state_probs)
-parties_sampled = np.random.choice(parties, size=151, replace=True, p=party_probs)
+# Generate the data
+outbreak_settings_sampled = np.random.choice(
+    outbreak_settings,
+    size=num_data,
+    replace=True,
+)
+causative_agents_sampled = np.random.choice(
+    causative_agent_groups,
+    size=num_data,
+    replace=True,
+)
+months_sampled = np.random.choice(
+    list(range(1, 13)),
+    size=num_data,
+    replace=True,
+)
+durations_sampled = np.random.randint(
+    3,
+    21,
+    size=num_data,
+)  # Random duration between 3 and 20 days
 
 # Create a polars DataFrame
-analysis_data = pl.DataFrame({
-    "division": divisions,
-    "state": states_sampled,
-    "party": parties_sampled
-})
+outbreak_data = pd.DataFrame(
+    {
+        "Outbreak Setting": outbreak_settings_sampled,
+        "Causative Agent Group": causative_agents_sampled,
+        "Month Outbreak Began": months_sampled,
+        "Outbreak Duration Days": durations_sampled,
+    }
+)
 
 
 #### Save data ####
-analysis_data.write_csv("data/00-simulated_data/simulated_data.csv")
+# Write the simulated data to a CSV file
+output_dir = "data/00-simulated_data"
+outbreak_data.to_csv(f"{output_dir}/simulated_data.csv", index=False)
