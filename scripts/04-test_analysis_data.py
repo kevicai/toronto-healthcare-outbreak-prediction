@@ -6,7 +6,7 @@
 # License: MIT
 # Pre-requisites:
 # - 03-clean_data.py
-# - install requirements.txt Python libraries
+# - Install requirements.txt Python libraries
 
 import pandas as pd
 import pytest

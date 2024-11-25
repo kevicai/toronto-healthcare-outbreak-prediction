@@ -1,10 +1,12 @@
-# Purpose: Models... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+#### Preamble ####
+# Purpose: Models outbreak duration using Bayesian linear regression
+# Author: Kevin Cai
+# Date: Dec 1, 2024
+# Contact: kev.cai@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites:
+# - Data preprocessed and stored in `data/02-analysis_data/analysis_data.csv`
+# - Install required R packages (`rstanarm`, `dplyr`, `caret`)
 
 library(rstanarm)
 library(dplyr) # For data manipulation
@@ -48,16 +50,22 @@ model <- stan_glm(
   seed = 22
 )
 
-# Summarize the model
-summary(model)
+# # Summarize the model
+# summary(model)
 
-# Make predictions on the test set
-y_pred <- predict(model, newdata = test_data)
+# # Make predictions on the test set
+# y_pred <- predict(model, newdata = test_data)
 
-# Evaluate the model
-mse <- mean((test_data$Outbreak.Duration.Days - y_pred)^2)
-r2 <- 1 - (sum((test_data$Outbreak.Duration.Days - y_pred)^2) / sum((test_data$Outbreak.Duration.Days - mean(train_data$Outbreak.Duration.Days))^2))
+# # Evaluate the model
+# mse <- mean((test_data$Outbreak.Duration.Days - y_pred)^2)
+# r2 <- 1 - (sum((test_data$Outbreak.Duration.Days - y_pred)^2) / sum((test_data$Outbreak.Duration.Days - mean(train_data$Outbreak.Duration.Days))^2))
 
-# Print evaluation metrics
-cat(sprintf("Mean Squared Error (MSE): %.2f\n", mse))
-cat(sprintf("R-squared: %.2f\n", r2))
+# # Print evaluation metrics
+# cat(sprintf("Mean Squared Error (MSE): %.2f\n", mse))
+# cat(sprintf("R-squared: %.2f\n", r2))
+
+#### Save model ####
+saveRDS(
+  model,
+  file = "models/model.rds"
+)

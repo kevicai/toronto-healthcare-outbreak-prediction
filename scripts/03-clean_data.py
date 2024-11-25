@@ -1,12 +1,12 @@
 #### Preamble ####
-# Purpose: Cleans the raw grocery data
+# Purpose: Cleans the raw outbreak data
 # Author: Kevin Cai
 # Date: Dec 1, 2024
 # Contact: kev.cai@mail.utoronto.ca
 # License: MIT
 # Pre-requisites:
 # - 02-download_data.py
-# - install requirements.txt Python libraries
+# - Install requirements.txt Python libraries
 
 import pandas as pd
 import os

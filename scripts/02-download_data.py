@@ -1,11 +1,11 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from
+# Purpose: Downloads and saves the outbreak data from OpenDataToronto: https://open.toronto.ca/dataset/outbreaks-in-toronto-healthcare-institutions/
 # Author: Kevin Cai
 # Date: Dec 1, 2024
 # Contact: kev.cai@mail.utoronto.ca
 # License: MIT
 # Pre-requisites: 
-# - install requirements.txt Python libraries
+# - Install requirements.txt Python libraries
 
 import requests
 import os

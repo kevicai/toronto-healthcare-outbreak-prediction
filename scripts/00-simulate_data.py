@@ -1,11 +1,11 @@
 #### Preamble ####
-# Purpose: Simulates a dataset of healthcare outbreak data
+# Purpose: Simulates a dataset of outbreak data
 # Author: Kevin Cai
 # Date: Dec 1, 2024
 # Contact: kev.cai@mail.utoronto.ca
 # License: MIT
 # Pre-requisites:
-# - install requirements.txt Python libraries
+# - Install requirements.txt Python libraries
 
 #### Workspace setup ####
 import pandas as pd
