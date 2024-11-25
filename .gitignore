@@ -45,6 +45,6 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-venv
+.venv
 
 /data
