@@ -41,33 +41,26 @@ combined_df["Date Declared Over"] = pd.to_datetime(
 )
 
 # Calculate the difference in days and create a new column
-combined_df["Outbreak Duration Days"] = (
+combined_df["duration"] = (
     combined_df["Date Declared Over"] - combined_df["Date Outbreak Began"]
 ).dt.days
 
 # Extract the month of the start of the outbreak
-combined_df["Month Outbreak Began"] = combined_df["Date Outbreak Began"].dt.month
+combined_df["month"] = combined_df["Date Outbreak Began"].dt.month
 
-# Rename the "Causative Agent-1" column to "Main Causative Agent"
+# Rename variables
 combined_df["Main Causative Agent"] = combined_df["Causative Agent-1"]
+combined_df["outbreak_setting"] = combined_df["Outbreak Setting"]
 
 # Select required columns
 df = combined_df[
     [
-        "Outbreak Setting",
+        "outbreak_setting",
         "Main Causative Agent",
-        "Month Outbreak Began",
-        "Outbreak Duration Days",
+        "month",
+        "duration",
     ]
 ]
-
-# unique causative agents
-# unique_values = sorted(
-#     df_cleaned["Main Causative Agent"].unique()
-# )  # original 55 agents
-# print(len(unique_values))
-# for value in unique_values:
-#     print(value)
 
 # Define grouping rules:
 group_mapping = {
@@ -126,7 +119,7 @@ rows_before = df.shape[0]
 # Filter invalid or uninformative rows
 df = df.dropna()
 df = df[df["Main Causative Agent"] != "Unable to identify"]
-
+df = df[~df["outbreak_setting"].isin(["Shelter", "Transitional care"])]
 
 def group_causative_agent(agent):
     mapping = reverse_mapping.get(agent, "Other")
@@ -134,34 +127,23 @@ def group_causative_agent(agent):
     #     print(agent)
     return mapping
 
-df["Causative Agent Group"] = df["Main Causative Agent"].apply(group_causative_agent)
+df["causative_agent"] = df["Main Causative Agent"].apply(group_causative_agent)
 
-df["Outbreak Duration Days"] = df["Outbreak Duration Days"].apply(int)
+df["duration"] = df["duration"].apply(int)
 
 # Filter uninformative rows
-df = df[df["Causative Agent Group"] != "Other"]
+df = df[df["causative_agent"] != "Other"]
 
 # Count rows after removing invalid data
 rows_after = df.shape[0]
 rows_removed = rows_before - rows_after
 
-value_counts = df["Causative Agent Group"].value_counts()
-print(value_counts)
-
-# top_10 = (
-#     df["Main Causative Agent"]
-#     .value_counts()
-#     .sort_values()  # Sort by counts in descending order
-#     .head(10)
-# )
-# print(top_10)
-
 df = df[
     [
-        "Outbreak Setting",
-        "Causative Agent Group",
-        "Month Outbreak Began",
-        "Outbreak Duration Days",
+        "outbreak_setting",
+        "causative_agent",
+        "month",
+        "duration",
     ]
 ]
 

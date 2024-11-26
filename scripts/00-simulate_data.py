@@ -63,10 +63,10 @@ durations_sampled = np.random.randint(
 # Create a polars DataFrame
 outbreak_data = pd.DataFrame(
     {
-        "Outbreak Setting": outbreak_settings_sampled,
-        "Causative Agent Group": causative_agents_sampled,
-        "Month Outbreak Began": months_sampled,
-        "Outbreak Duration Days": durations_sampled,
+        "outbreak_setting": outbreak_settings_sampled,
+        "causative_agent": causative_agents_sampled,
+        "month": months_sampled,
+        "duration": durations_sampled,
     }
 )
 
