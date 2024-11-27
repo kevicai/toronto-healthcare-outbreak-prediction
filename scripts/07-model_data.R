@@ -20,8 +20,8 @@ set.seed(22)
 # Load the previously saved training and test data
 train_data <- read.csv("./data/02-analysis_data/train_data.csv")
 
-# Convert categorical variables to factors
-train_data <- train_data %>%
+# Convert variables to factors
+train_data <- train_data |>
   mutate(
     outbreak_setting = factor(outbreak_setting),
     causative_agent = factor(causative_agent),
@@ -29,7 +29,7 @@ train_data <- train_data %>%
   )
 
 # Separate the features and target variable for modeling
-X <- train_data %>%
+X <- train_data |>
   select(outbreak_setting, causative_agent, month)
 y <- train_data$duration
 

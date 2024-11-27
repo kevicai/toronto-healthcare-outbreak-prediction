@@ -19,6 +19,10 @@ bibliography: references.bib
 
 library(tidyverse)
 library(knitr)
+library(ggplot2)
+library("rstanarm")
+library("caret")
+library("loo")
 ```
 
 
@@ -51,7 +55,7 @@ head(data, 5) |>
 
 There is 5387 observations in the orginal dataset and 1119 observations were removed that contained missing, invalid, or irrelivant data of the variables we're interested in. The data was first downloaded using `Python` [@citePython] and cleaned with the `pandas` package [@citePandas]. The cleaning process involved converting dates to a standardized datetime format, creating a "duration" variable representing the length of each outbreak, and extracting the month of the outbreak's start. Irrelevant columns were removed, and variables were renamed for clarity. Causative agents were grouped into broader categories, and rows with missing or invalid data were removed, including those with unidentifiable causative agents or certain outbreak settings. The final dataset was saved for further analysis.
 
-`R` [@citeR] is used for the generation of figures, graphs, and tables throughout this paper. Specifically, the `rstanarm` package [@rstanarm] was employed to fit the model. For data manipulation, the `dplyr` package [@dplyr] was utilized to clean and transform the data efficiently. The `caret` package [@caret] was used for model training, while `modelsummary` [@modelsummary] was used to produce concise tables summarizing the model output. The `loo` package [@loo] was used to perform leave-one-out cross-validation, which helped assess the model’s predictive performance.
+`R` [@citeR] is used for the generation of figures, graphs, and tables throughout this paper. Specifically, the `rstanarm` package [@rstanarm] was employed to fit the model. For data manipulation, the `dplyr` package [@dplyr] was utilized to clean and transform the data efficiently. The `caret` package [@caret] was used for model training, while `modelsummary` [@modelsummary] was used to produce concise tables summarizing the model output. The `loo` package [@loo] was used to perform leave-one-out cross-validation, which helped assess the model’s predictive performance. Finally, the package `ggplot2` is used to generate graphics and figures for this analysis.
 
 ## Measurement
 	
@@ -82,6 +86,19 @@ ggplot(data, aes(x = duration)) +
   )
 ```
 
+```{r, message = FALSE, echo = FALSE}
+#| label: tbl-duration-mean-var
+#| tbl-cap: "Summary of Outbreak Duration: Mean and Variance"
+mean_duration <- mean(data$duration)
+var_duration <- var(data$duration)
+
+tibble(
+  Statistic = c("Mean Duration", "Variance"),
+  Value = c(mean_duration, var_duration)
+) |> 
+  kable(col.names = c("Statistic", "Value"))
+```
+
 Longer outbreak durations may indicate challenges in containment, possibly influenced by the Outbreak Setting and Causative Agent.
 
 ## Predictor variables
@@ -94,9 +111,9 @@ The Outbreak Setting variable is categorical and identifies the type of healthca
 ```{r, message = FALSE, echo = FALSE}
 #| label: fig-setting-count
 #| fig-cap: "Outbreak occurrence in healthcare settings"
-outbreak_setting_count <- data %>%
-  count(outbreak_setting, name = "count") %>%
-  mutate(percentage = (count / sum(count)) * 100) %>%
+outbreak_setting_count <- data |>
+  count(outbreak_setting, name = "count") |>
+  mutate(percentage = (count / sum(count)) * 100) |>
   arrange(desc(count))
 
 # Bar graph for Outbreak Setting
@@ -126,9 +143,9 @@ The Causative Agent variable is categorical and reflects the infectious agents r
 ```{r, message = FALSE, echo = FALSE}
 #| label: fig-agent-count
 #| fig-cap: "Outbreak causative agent count and percentage"
-outbreak_agent_count <- data %>%
-  count(causative_agent, name = "count") %>%
-  mutate(percentage = (count / sum(count)) * 100) %>%
+outbreak_agent_count <- data |>
+  count(causative_agent, name = "count") |>
+  mutate(percentage = (count / sum(count)) * 100) |>
   arrange(desc(count))
 
 # Bar graph for Causative Agents
@@ -154,13 +171,13 @@ The Month variable is numerical and records the calendar month when each outbrea
 
 @fig-month shows the the occurance of outbreaks in each month, with winter months having siginifiantly more outbreaks compared to other months. This suggest that seasons have effects on outbreak occurances.
 
-@fig-month-duration the boxplot visualizes the distribution of outbreak durations for each month. While winter months have a higher frequency of outbreaks, the duration of these outbreaks appears similar across all months, with no distinct seasonal differences in median or variability of duration.
+@fig-month-duration the boxplot visualizes the distribution of outbreak durations for each month. The duration of months January to November outbreaks appears similar, while December has a noticeable increase in duration compared to other months.
 
 ```{r, message = FALSE, echo = FALSE}
 #| label: fig-month
 #| fig-cap: "Seasonal trends in outbreak occurrence and percentage"
-outbreak_month_count <- data %>%
-  count(month, name = "count") %>%
+outbreak_month_count <- data |>
+  count(month, name = "count") |>
   arrange(desc(month))
 
 ggplot(outbreak_month_count, aes(x = month, y = count)) +
@@ -179,8 +196,6 @@ ggplot(outbreak_month_count, aes(x = month, y = count)) +
 ```{r, message = FALSE, echo = FALSE}
 #| label: fig-month-duration
 #| fig-cap: "Duration of outbreaks across different months"
-library(ggplot2)
-
 # Scatter plot for month vs. duration
 ggplot(data, aes(x = as.factor(month), y = duration)) +
   geom_boxplot(fill = "steelblue", alpha = 0.7) +
@@ -203,11 +218,9 @@ ggplot(data, aes(x = as.factor(month), y = duration)) +
 
 To better understand the factors influencing the duration of outbreaks in Toronto healthcare facilities, a statistical model was developed using the negative binomial regression framework. This model was chosen because the outcome variable of interest, outbreak duration, is a count variable with evidence of overdispersion—where the variance exceeds the mean [@textbook]. Additionally, this model was Bayesian, meaning the parameters were treated as random variables with prior probability distributions reflecting initial beliefs about their values before considering the data.
 
-Both models were implemented  using the `rstanarm` package.
-
 ## Model Setup
 
-The setup for the Bayesian Negative Binomial regression model used in this analysis is as follows:
+The setup for the Bayesian negative binomial regression model used in this analysis is as follows:
 
 \begin{align} 
 y_i | \lambda_i &\sim \text{Negative Binomial}(\lambda_i, \phi) \\
@@ -221,45 +234,73 @@ y_i | \lambda_i &\sim \text{Negative Binomial}(\lambda_i, \phi) \\
 
 In the above model:
 
-- $\mu_i$ is the predicted duration of the outbreak $i$ in days.
-- $\lambda_i$ is the expected duration of outbreak $i$, modeled through a **log link**.
+- $\lambda_i$ is the expected duration of outbreak $i$, modeled through a log link.
 - $\beta_0$ is the intercept term.
 - $\beta_1$ is the coefficient for the **outbreak setting**.
 - $\beta_2$ is the coefficient for the **causative agent**.
 - $\beta_3$ is the coefficient for the **month** when the outbreak started.
-- $\phi$ is the **dispersion parameter** that controls the degree of overdispersion in the Negative Binomial distribution.
+- $\phi$ is the **dispersion parameter** that controls the degree of overdispersion in the negative binomial distribution.
 
 - All coefficients ($\beta_0, \beta_1, \beta_2, \beta_3$) are assigned **Normal(0, 2.5)** priors.
-- The dispersion parameter $\phi$ is assigned an **Exponential(1)** prior, reflecting a non-informative prior belief about the variance.
+- The dispersion parameter $\phi$ is assigned an **Exponential(1)** prior, reflecting our belief that the variance is greater than the mean.
 
 ## Model Selection
 
 ```{r, message = FALSE, echo = FALSE}
 #| label: load-models
-library(rstanarm)#| 
-
+library(rstanarm)
 poisson_model <-
     readRDS(file = here::here("models/poisson_model.rds"))
-neg_binom_model <- 
+neg_binomial_model <- 
     readRDS(file = here::here("models/neg_binomial_model.rds"))
 ```
 
-Both Negative Binomial model and Poisson model was constructed using rstanarm for the dataset. Negative Binomial model was chosen over the Poisson model as overall it was better at effectively predicting the  because it performed better in terms of the expected log pointwise predictive density (ELPD). We found that the Negative Binomial model has a larger ELPD, indicating that it provides a better fit to the data.
+Both negative binomial model and Poisson model for the dataset was constructed using the `rstanarm` package [@rstanarm] and R [@citeR]. But the negative binomial model was chosen over the Poisson model for several reasons. First, as shown in @tbl-modelresults, the variance of the outcome variable, duration, is significantly higher than the mean, indicating overdispersion. The Poisson model assumes equal mean and variance, which is not suitable in this case. The negative binomial model relaxes this assumption, allowing for overdispersion and providing a better fit for the data [@textbook].Additionally, the Leave-One-Out Cross Validation (LOO-CV) results in @tbl-loo-comparison show that the negative binomial model has a higher ELPD (Expected Log Pointwise Predictive Density) compared to the Poisson model. The ELPD is a metric that measures the model’s predictive performance, with higher values indicating a better fit to the data  [@textbook]. The fact that the negative binomial model outperforms the Poisson model in this regard suggests that it is more effective at capturing the underlying patterns of the outbreak duration data.
+
+Other regression models like logistic regression were not chosen because logistic regression is designed for modeling binary outcomes. Since our outcome variable, duration, is a continuous count variable representing the number of days an outbreak lasts, logistic regression is not appropriate because it cannot model continuous or count data. Linear regression was also not chosen because Poission and negative binomial distributions are more suitable for modeling count data like outbreak duration in days, where as linear regression is more suitible for continuous data.
 
 ## Model Diagnostics and Validation
 
-We performed several model validation checks to assess the adequacy of both models.
+We conducted several key validation checks to assess its predictive performance and overall adequacy. Aside from using LOO Cross Validation technique, we also calculated the Mean Absolute Error (MAE) for both models as a metric to assess the predictive performance of the Negative Binomial model over the Poisson model. To ensure the model doesn't over fit the training data, we first split the data into training and test sets. The data was randomly divided using the `caret` package [@caret], with 80% used for model training and the remaining 20% reserved for testing. We used both models to predict the outcome variable (outbreak duration) on the test set and compared the predicted values to the actual values from the test set to compute the MAE for each model.
+
+```{r, message = FALSE, echo = FALSE}
+#| label: tbl-mae-comparison
+#| tbl-cap: "Comparison of Mean Absolute Error (MAE) for Poisson and Negative Binomial Models"
+test_data <- read.csv(here::here("data/02-analysis_data/test_data.csv"))
+
+# Convert variables to factors
+test_data <- test_data |>
+  mutate(
+    outbreak_setting = factor(outbreak_setting),
+    causative_agent = factor(causative_agent),
+    month = factor(month)
+  )
+
+poisson_pred <- predict(poisson_model, newdata = test_data, type = "response")
+neg_binomial_pred <- predict(neg_binomial_model, newdata = test_data, type = "response")
+ 
+# Compute MAEs and present in a table
+mae_poisson <- round(mean(abs(test_data$duration - poisson_pred)), 2)
+mae_neg_binomial <- round(mean(abs(test_data$duration - neg_binomial_pred)), 2)
+
+mae_table <- tibble(
+  Model = c("Poisson Model", "Negative Binomial Model"),
+  MAE = c(mae_poisson, mae_neg_binomial)
+)
+
+mae_table |>
+  kable(col.names = c("Model", "Mean Absolute Error (MAE)")) 
+```
+
+From @tbl-mae-comparison, the MAE for the Poisson model is 6.53, while the MAE for the Negative Binomial model is 6.52. The difference between the MAEs is minimal, suggesting that both models perform similarly in terms of prediction accuracy. However, the Negative Binomial model may still be preferred as it accounts for overdispersion, which is more appropriate for count data. The MAE of 6.52 means that, on average, the predicted outbreak duration from the Negative Binomial model deviates from the actual duration by approximately 6.52 days. In other words, for any given outbreak in the test data, the model's prediction of the outbreak's duration is off by around 6.5 days, either overestimating or underestimating the actual duration.
 
 # Results
 
-Our results are summarized in @tbl-modelresults.
+Our results are summarized in @tbl-model-results.
 
-```{r}
-#| echo: false
-#| eval: true
-#| label: tbl-modelresults
+```{r, message = FALSE, echo = FALSE}
+#| label: tbl-model-results
 #| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
-#| warning: false
 
 # modelsummary::modelsummary(
 #     list(
@@ -304,20 +345,34 @@ Weaknesses and next steps should also be included.
 
 ## Posterior predictive check
 
-In @fig-ppchecks, using code adapted from @textbook, posterior prediction checks were performed for both the Poisson model and the Negative Binomial model. The figure show how well the model is able to predict the observed outcomes.
+In @fig-ppchecks, using code adapted from @textbook, posterior prediction checks were performed for both the Poisson model and the negative binomial model. The figure show how well the model is able to predict the observed outcomes.
 
 ```{r, message = FALSE, echo = FALSE}
 #| label: fig-ppchecks
 #| layout-ncol: 2
-#| fig-cap: "Comparing posterior prediction checks for the Poisson model and the Negative Binomial model"
-#| fig-subcap: ["Poisson model posterior prediction check", "Negative Binomial model posterior prediction check"]
+#| fig-cap: "Comparing posterior prediction checks for the Poisson model and the negative binomial model"
+#| fig-subcap: ["Poisson model posterior prediction check", "Negative binomial model posterior prediction check"]
 pp_check(poisson_model) +
   theme_classic() +
   theme(legend.position = "bottom")
 
-pp_check(neg_binom_model) +
+pp_check(neg_binomial_model) +
   theme_classic() +
   theme(legend.position = "bottom")
+```
+
+## Leave-One-Out (LOO) Cross Validation (CV) Comparison
+
+In @fig-loo-comparison, we compare LOO performance of the Poission model against the negative binomial model based on the expected log pointwise predictive density (ELPD) and find that the negative binomial model has a higher ELPD value.
+
+```{r, message = FALSE, echo = FALSE}
+#| label: tbl-loo-comparison
+#| tbl-cap: "Comparing LOO for Poisson and negative binomial models"
+poisson_loo <- loo(poisson_model, cores = 2)
+neg_binomial_loo <- loo(neg_binomial_model, cores = 2)
+
+loo_comparison <- loo_compare(poisson_loo, neg_binomial_loo)
+loo_comparison
 ```
 
 ## Diagnostics
