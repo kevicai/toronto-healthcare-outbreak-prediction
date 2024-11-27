@@ -1,5 +1,5 @@
 ---
-title: "My title"
+title: "Understanding the Factors Influencing Outbreak Duration in Toronto Healthcare Institutions"
 subtitle: "My subtitle if needed"
 author: 
   - Kevin Cai
