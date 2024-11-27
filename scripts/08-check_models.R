@@ -10,7 +10,7 @@
 
 # Load the previously saved models
 poisson_model <- readRDS("models/poisson_model.rds")
-neg_binomial_model <- readRDS("models/neg_binom_model.rds")
+neg_binomial_model <- readRDS("models/neg_binomial_model.rds")
 
 # Load test data from CSV
 test_data <- read.csv("data/02-analysis_data/test_data.csv")
@@ -21,13 +21,12 @@ test_data <- test_data %>%
     month = factor(month)
   )
 
-
 # Posterior predictive checks
-# pp_check(poisson_model) +
-#   theme(legend.position = "bottom")
+pp_check(poisson_model) +
+  theme(legend.position = "bottom")
 
-# pp_check(neg_binomial_model) +
-#   theme(legend.position = "bottom")
+pp_check(neg_binomial_model) +
+  theme(legend.position = "bottom")
 
 # Compare the models using LOO (Leave-One-Out Cross Validation)
 poisson_loo <- loo(poisson_model, cores = 2)

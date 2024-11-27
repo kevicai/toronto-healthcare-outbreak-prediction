@@ -21,10 +21,9 @@ np.random.seed(853)
 outbreak_settings = [
     "Hospital-Chronic Care",
     "Hospital-Psychiatric",
+    "Hospital−Acute Care",
     "LTCH",
     "Retirement Home",
-    "Shelter",
-    "Transitional Care",
 ]
 
 # Causative agent groups

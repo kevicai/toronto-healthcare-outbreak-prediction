@@ -119,7 +119,7 @@ rows_before = df.shape[0]
 # Filter invalid or uninformative rows
 df = df.dropna()
 df = df[df["Main Causative Agent"] != "Unable to identify"]
-df = df[~df["outbreak_setting"].isin(["Shelter", "Transitional care"])]
+df = df[~df["outbreak_setting"].isin(["Shelter", "Transitional Care"])]
 
 def group_causative_agent(agent):
     mapping = reverse_mapping.get(agent, "Other")

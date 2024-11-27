@@ -33,12 +33,13 @@ X <- train_data %>%
   select(outbreak_setting, causative_agent, month)
 y <- train_data$duration
 
-# Fit Poisson and Negative Binomial models 
+# Fit Poisson and Negative Binomial models
 poisson_model <- stan_glm(
   duration ~ outbreak_setting + causative_agent + month,
   data = train_data,
   family = poisson(link = "log"),
-  prior = normal(0, 2.5),
+  prior = normal(location = 0, scale = 2.5, autoscale = TRUE),
+  prior_intercept = normal(location = 0, scale = 2.5, autoscale = TRUE),
   seed = 22
 )
 
@@ -46,7 +47,8 @@ neg_binomial_model <- stan_glm(
   duration ~ outbreak_setting + causative_agent + month,
   data = train_data,
   family = neg_binomial_2(link = "log"),
-  prior = normal(0, 2.5),
+  prior = normal(location = 0, scale = 2.5, autoscale = TRUE),
+  prior_intercept = normal(location = 0, scale = 2.5, autoscale = TRUE),
   seed = 22
 )
 

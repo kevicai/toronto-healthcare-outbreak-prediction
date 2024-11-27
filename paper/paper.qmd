@@ -2,9 +2,8 @@
 title: "My title"
 subtitle: "My subtitle if needed"
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: [https://github.com/RohanAlexander/starter_folder](https://github.com/RohanAlexander/starter_folder)."
+  - Kevin Cai
+thanks: "Code and data are available at: [https://github.com/kevicai/toronto-healthcare-outbreak-prediction](https://github.com/kevicai/toronto-healthcare-outbreak-prediction)."
 date: today
 date-format: long
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
@@ -19,11 +18,11 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
-library(palmerpenguins)
+library(knitr)
 ```
 
 
-# Introduction
+# Introduction {#sec-intro}
 
 Overview paragraph
 
@@ -36,108 +35,220 @@ Why it matters paragraph
 Telegraphing paragraph: The remainder of this paper is structured as follows. @sec-data....
 
 
-
-
-
-
 # Data {#sec-data}
 
 ## Overview
 
-We use the statistical programming language R [@citeR].... Our data [@shelter].... Following @tellingstories, we consider...
+This report uses the Outbreaks in Toronto Healthcare Institutions dataset, contains data from January 2016 to November 2024. The dataset is provided by Toronto Public Health, through City of Toronto Open Data Portal [@datasource]. The dataset tracks reported outbreaks of gastroenteric and respiratory illnesses in Toronto healthcare institutions and contains detailed information on outbreak settings, causative agents, and outbreak durations. Following the principles from Telling Stories with Data [@textbook], we examine how the characteristics of outbreaks, such as the type of healthcare institution, the causative agent, and the month the outbreak began, influence their durations. A sample of the cleaned dataset is shown in @tbl-cleaned. 
 
-Overview text
+```{r, message = FALSE, echo = FALSE}
+#| label: tbl-cleaned
+#| tbl-cap: "Sample of Cleaned Outbreaks in Toronto Healthcare Institution Data"
+data <- read.csv(here::here("data/02-analysis_data/analysis_data.csv"))
+head(data, 5) |>
+    kable(col.names = c("Outbreak Setting", "Causative Agent", "Month", "Outbreak Duration"))
+```
+
+There is 5387 observations in the orginal dataset and 1119 observations were removed that contained missing, invalid, or irrelivant data of the variables we're interested in. The data was first downloaded using `Python` [@citePython] and cleaned with the `pandas` package [@citePandas]. The cleaning process involved converting dates to a standardized datetime format, creating a "duration" variable representing the length of each outbreak, and extracting the month of the outbreak's start. Irrelevant columns were removed, and variables were renamed for clarity. Causative agents were grouped into broader categories, and rows with missing or invalid data were removed, including those with unidentifiable causative agents or certain outbreak settings. The final dataset was saved for further analysis.
+
+`R` [@citeR] is used for the generation of figures, graphs, and tables throughout this paper. Specifically, the `rstanarm` package [@rstanarm] was employed to fit the model. For data manipulation, the `dplyr` package [@dplyr] was utilized to clean and transform the data efficiently. The `caret` package [@caret] was used for model training, while `modelsummary` [@modelsummary] was used to produce concise tables summarizing the model output. The `loo` package [@loo] was used to perform leave-one-out cross-validation, which helped assess the model’s predictive performance.
 
 ## Measurement
 	
-Some paragraphs about how we go from a phenomena in the world to an entry in the dataset.
+The data was primarily collected through mandatory reporting by healthcare institutions to Toronto Public Health under the Ontario Health Protection and Promotion Act (HPPA). Reports of suspected or confirmed outbreaks include both gastroenteric and respiratory illnesses. These reports are based on active monitoring by institutional staff, who observe and document signs and symptoms such as nausea, vomiting, fever, cough, or sore throat.
 
-## Outcome variables
+Some details, such as the causative agent group, may initially be unconfirmed and later identified through laboratory tests or clinical evaluations. However, these identifications are not always definitive. For instance, "Coronavirus*" in the dataset refers to seasonal coronaviruses, which are commonly implicated in respiratory outbreaks, and does not include COVID-19.
 
-Add graphs, tables and text. Use sub-sub-headings for each outcome variable or update the subheading to be singular.
+The unit of measurement for outbreak duration is in days. Other data fields, such as outbreak setting and causative agent group, are categorical features without numerical units. The dataset is updated weekly, ensuring it reflects the most recent outbreak data available.
 
+## Outcome variable
 
+### Duration
+The Duration variable is numerical and indicates the total number of days each outbreak lasted. This reflects the severity and magnitude of the outbreak. It is constructed from the dataset by calculating the difference between the outbreak start and end dates.
 
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
-
-```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
-#| echo: false
-
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
+```{r, message = FALSE, echo = FALSE}
+#| label: fig-duration
+#| fig-cap: "Distribution of Outbreak Duration"
+ggplot(data, aes(x = duration)) +
+  geom_histogram(fill = "steelblue", binwidth = 5, alpha = 0.8) +
+  labs(
+    x = "Duration (Days)",
+    y = "Frequency"
+  ) +
   theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+  theme(
+    axis.text = element_text(size = 8),
+    axis.title = element_text(size = 10)
+  )
 ```
 
-Talk more about it.
-
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
-
-```{r}
-#| label: fig-planes
-#| fig-cap: Relationship between wing length and width
-#| echo: false
-#| warning: false
-#| message: false
-
-analysis_data <- read_csv(here::here("data/02-analysis_data/analysis_data.csv"))
-
-analysis_data |> 
-  ggplot(aes(x = width, y = length)) +
-  geom_point(alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Wing width (mm)",
-       y = "Wing length (mm)")
-```
-
-Talk way more about it. 
+Longer outbreak durations may indicate challenges in containment, possibly influenced by the Outbreak Setting and Causative Agent.
 
 ## Predictor variables
 
-Add graphs, tables and text.
+### Outbreak Setting
+The Outbreak Setting variable is categorical and identifies the type of healthcare institution where the outbreak occurred, such as hospitals, long-term care homes (LTCH), or retirement homes. It provides insights into the environments most affected by outbreaks.
 
-Use sub-sub-headings for each outcome variable and feel free to combine a few into one if they go together naturally.
+@fig-setting-count illustrates the count of outbreaks across different settings in the dataset. 
 
+```{r, message = FALSE, echo = FALSE}
+#| label: fig-setting-count
+#| fig-cap: "Outbreak occurrence in healthcare settings"
+outbreak_setting_count <- data %>%
+  count(outbreak_setting, name = "count") %>%
+  mutate(percentage = (count / sum(count)) * 100) %>%
+  arrange(desc(count))
 
+# Bar graph for Outbreak Setting
+ggplot(outbreak_setting_count, aes(x = reorder(outbreak_setting, -count), y = count)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  geom_text(aes(label = sprintf("%.1f%%", percentage)), hjust = -0.1, size = 3) +
+  scale_y_continuous(expand = expansion(mult = c(0.02, 0.2))) + # Add right padding
+  coord_flip() + 
+  labs(
+    x = "Outbreak Setting",
+    y = "Count"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 8),
+    axis.title = element_text(size = 10)
+  )
+```
 
+LTCH (Long-Term Care Homes) accounts for a significant portion of outbreaks, likely due to the vulnerability of their populations. Comparing the frequency of outbreaks across settings can reveal risk patterns.
 
+### Causative Agent
+The Causative Agent variable is categorical and reflects the infectious agents responsible for outbreaks. While the original dataset contains 55 agents, they are grouped into seven broader categories to simplify the analysis and enhance interpretability.
 
+@fig-agent-count illustrates the count and percentage distribution of causative agents in the dataset.
 
+```{r, message = FALSE, echo = FALSE}
+#| label: fig-agent-count
+#| fig-cap: "Outbreak causative agent count and percentage"
+outbreak_agent_count <- data %>%
+  count(causative_agent, name = "count") %>%
+  mutate(percentage = (count / sum(count)) * 100) %>%
+  arrange(desc(count))
 
+# Bar graph for Causative Agents
+ggplot(outbreak_agent_count, aes(x = reorder(causative_agent, -count), y = count)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  geom_text(aes(label = sprintf("%.1f%%", percentage)), hjust = -0.1, size = 3) +
+  scale_y_continuous(expand = expansion(mult = c(0.02, 0.2))) + # Add right padding
+  coord_flip() +
+  labs(
+    x = "Causative Agent",
+    y = "Count"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 8),
+    axis.title = element_text(size = 10),
+    plot.margin = margin(1, 1.2, 1, 1, "cm")
+  )
+```
+
+### Month Outbreak Began
+The Month variable is numerical and records the calendar month when each outbreak started. It reflects seasonal trends and potential patterns in infection rates. This variable is extracted from the date where each outbreak began from the original dataset. 
+
+@fig-month shows the the occurance of outbreaks in each month, with winter months having siginifiantly more outbreaks compared to other months. This suggest that seasons have effects on outbreak occurances.
+
+@fig-month-duration the boxplot visualizes the distribution of outbreak durations for each month. While winter months have a higher frequency of outbreaks, the duration of these outbreaks appears similar across all months, with no distinct seasonal differences in median or variability of duration.
+
+```{r, message = FALSE, echo = FALSE}
+#| label: fig-month
+#| fig-cap: "Seasonal trends in outbreak occurrence and percentage"
+outbreak_month_count <- data %>%
+  count(month, name = "count") %>%
+  arrange(desc(month))
+
+ggplot(outbreak_month_count, aes(x = month, y = count)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(
+    x = "Month",
+    y = "Count"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 8),
+    axis.title = element_text(size = 10)
+  )
+```
+
+```{r, message = FALSE, echo = FALSE}
+#| label: fig-month-duration
+#| fig-cap: "Duration of outbreaks across different months"
+library(ggplot2)
+
+# Scatter plot for month vs. duration
+ggplot(data, aes(x = as.factor(month), y = duration)) +
+  geom_boxplot(fill = "steelblue", alpha = 0.7) +
+  labs(
+    x = "Month",
+    y = "Duration (days)",
+    title = "Duration of Outbreaks Across Months"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 8),
+    axis.title = element_text(size = 10),
+    plot.title = element_text(size = 12, face = "bold")
+  )
+```
 
 # Model
 
-The goal of our modelling strategy is twofold. Firstly,...
+## Model Overview
 
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
+To better understand the factors influencing the duration of outbreaks in Toronto healthcare facilities, a statistical model was developed using the negative binomial regression framework. This model was chosen because the outcome variable of interest, outbreak duration, is a count variable with evidence of overdispersion—where the variance exceeds the mean [@textbook]. Additionally, this model was Bayesian, meaning the parameters were treated as random variables with prior probability distributions reflecting initial beliefs about their values before considering the data.
 
-## Model set-up
+Both models were implemented  using the `rstanarm` package.
 
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
+## Model Setup
+
+The setup for the Bayesian Negative Binomial regression model used in this analysis is as follows:
 
 \begin{align} 
-y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
-\alpha &\sim \mbox{Normal}(0, 2.5) \\
-\beta &\sim \mbox{Normal}(0, 2.5) \\
-\gamma &\sim \mbox{Normal}(0, 2.5) \\
-\sigma &\sim \mbox{Exponential}(1)
+y_i | \lambda_i &\sim \text{Negative Binomial}(\lambda_i, \phi) \\
+\log(\lambda_i) &= \beta_0 + \beta_1 \times \text{outbreak\_setting}_i + \beta_2 \times \text{causative\_agent}_i + \beta_3 \times \text{month}_i \\
+\beta_0 &\sim \text{Normal}(0, 2.5) \\
+\beta_1 &\sim \text{Normal}(0, 2.5) \\
+\beta_2 &\sim \text{Normal}(0, 2.5) \\
+\beta_3 &\sim \text{Normal}(0, 2.5) \\
+\phi &\sim \text{Exponential}(1)
 \end{align}
 
-We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
+In the above model:
 
+- $\mu_i$ is the predicted duration of the outbreak $i$ in days.
+- $\lambda_i$ is the expected duration of outbreak $i$, modeled through a **log link**.
+- $\beta_0$ is the intercept term.
+- $\beta_1$ is the coefficient for the **outbreak setting**.
+- $\beta_2$ is the coefficient for the **causative agent**.
+- $\beta_3$ is the coefficient for the **month** when the outbreak started.
+- $\phi$ is the **dispersion parameter** that controls the degree of overdispersion in the Negative Binomial distribution.
 
-### Model justification
+- All coefficients ($\beta_0, \beta_1, \beta_2, \beta_3$) are assigned **Normal(0, 2.5)** priors.
+- The dispersion parameter $\phi$ is assigned an **Exponential(1)** prior, reflecting a non-informative prior belief about the variance.
 
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
+## Model Selection
 
-We can use maths by including latex between dollar signs, for instance $\theta$.
+```{r, message = FALSE, echo = FALSE}
+#| label: load-models
+library(rstanarm)#| 
 
+poisson_model <-
+    readRDS(file = here::here("models/poisson_model.rds"))
+neg_binom_model <- 
+    readRDS(file = here::here("models/neg_binomial_model.rds"))
+```
+
+Both Negative Binomial model and Poisson model was constructed using rstanarm for the dataset. Negative Binomial model was chosen over the Poisson model as overall it was better at effectively predicting the  because it performed better in terms of the expected log pointwise predictive density (ELPD). We found that the Negative Binomial model has a larger ELPD, indicating that it provides a better fit to the data.
+
+## Model Diagnostics and Validation
+
+We performed several model validation checks to assess the adequacy of both models.
 
 # Results
 
@@ -146,29 +257,17 @@ Our results are summarized in @tbl-modelresults.
 ```{r}
 #| echo: false
 #| eval: true
-#| warning: false
-#| message: false
-
-library(rstanarm)
-
-first_model <-
-  readRDS(file = here::here("models/first_model.rds"))
-```
-
-```{r}
-#| echo: false
-#| eval: true
 #| label: tbl-modelresults
 #| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
 #| warning: false
 
-modelsummary::modelsummary(
-  list(
-    "First model" = first_model
-  ),
-  statistic = "mad",
-  fmt = 2
-)
+# modelsummary::modelsummary(
+#     list(
+#         "Model" = model
+#     ),
+#     statistic = "mad",
+#     fmt = 2
+# )
 ```
 
 
@@ -201,40 +300,29 @@ Weaknesses and next steps should also be included.
 
 # Model details {#sec-model-details}
 
+## Outcome Variable Variance and Mean 
+
 ## Posterior predictive check
 
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
+In @fig-ppchecks, using code adapted from @textbook, posterior prediction checks were performed for both the Poisson model and the Negative Binomial model. The figure show how well the model is able to predict the observed outcomes.
 
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
-
-```{r}
-#| eval: true
-#| echo: false
-#| message: false
-#| warning: false
-#| label: fig-ppcheckandposteriorvsprior
+```{r, message = FALSE, echo = FALSE}
+#| label: fig-ppchecks
 #| layout-ncol: 2
-#| fig-cap: "Examining how the model fits, and is affected by, the data"
-#| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
-
-pp_check(first_model) +
+#| fig-cap: "Comparing posterior prediction checks for the Poisson model and the Negative Binomial model"
+#| fig-subcap: ["Poisson model posterior prediction check", "Negative Binomial model posterior prediction check"]
+pp_check(poisson_model) +
   theme_classic() +
   theme(legend.position = "bottom")
 
-posterior_vs_prior(first_model) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom") +
-  coord_flip()
+pp_check(neg_binom_model) +
+  theme_classic() +
+  theme(legend.position = "bottom")
 ```
 
 ## Diagnostics
 
-@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
-
-@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
-
-```{r}
+<!-- ```{r}
 #| echo: false
 #| eval: true
 #| message: false
@@ -244,10 +332,10 @@ posterior_vs_prior(first_model) +
 #| fig-subcap: ["Trace plot", "Rhat plot"]
 #| layout-ncol: 2
 
-plot(first_model, "trace")
+plot(model, "trace")
 
-plot(first_model, "rhat")
-```
+plot(model, "rhat")
+``` -->
 
 
 
