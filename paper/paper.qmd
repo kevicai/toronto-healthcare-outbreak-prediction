@@ -1,5 +1,5 @@
 ---
-title: "Understanding the Factors Influencing Outbreak Duration in Toronto Healthcare Institutions"
+title: "Analyzing the Factors Influencing Outbreak Duration in Toronto Healthcare Institutions"
 subtitle: "My subtitle if needed"
 author: 
   - Kevin Cai
