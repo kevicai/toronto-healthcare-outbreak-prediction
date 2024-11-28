@@ -138,6 +138,23 @@ df = df[df["causative_agent"] != "Other"]
 rows_after = df.shape[0]
 rows_removed = rows_before - rows_after
 
+# Map month number to text
+month_mapping = {
+    1: "Jan",
+    2: "Feb",
+    3: "Mar",
+    4: "Apr",
+    5: "May",
+    6: "Jun",
+    7: "Jul",
+    8: "Aug",
+    9: "Sep",
+    10: "Oct",
+    11: "Nov",
+    12: "Dec",
+}
+df["month"] = df["month"].map(month_mapping)
+
 df = df[
     [
         "outbreak_setting",

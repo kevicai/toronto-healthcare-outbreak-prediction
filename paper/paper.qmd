@@ -9,6 +9,8 @@ date-format: long
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 format: pdf
 number-sections: true
+execute: 
+  cache: true
 bibliography: references.bib
 ---
 
@@ -20,24 +22,24 @@ bibliography: references.bib
 library(tidyverse)
 library(knitr)
 library(ggplot2)
-library("rstanarm")
-library("caret")
-library("loo")
+library(rstanarm)
+library(caret)
+library(loo)
+library(broom.mixed)
+library(modelsummary)
+library(kableExtra)
 ```
 
 
 # Introduction {#sec-intro}
 
-Overview paragraph
+Outbreaks of infectious diseases in healthcare institutions are a significant challenge, particularly in hospitals, long-term care homes, and retirement homes, where vulnerable populations are most at risk. Understanding the factors that influence the duration of these outbreaks is important for improving preparedness, response times, and resource allocation. Previous studies have looked at factors affecting outbreak durations, but more research is needed, especially in Toronto’s healthcare system. This paper analyzes the key factors that influence the duration of outbreaks in Toronto healthcare institutions, focusing on outbreak setting, causative agents, and the timing of outbreaks.
 
-Estimand paragraph
+This study uses a Bayesian negative binomial regression model to predict outbreak durations in Toronto's healthcare facilities. The model includes factors like the type of healthcare institution (outbreak setting), the causative agent, and the month the outbreak occurred. This research aims to identify which factors contribute most to variation in outbreak durations. It provides actionable information for public health officials and healthcare managers to improve their response strategies.
 
-Results paragraph
+The results of this analysis help manage outbreaks, optimize patient care, and reduce the strain on healthcare facilities. Identifying high-risk settings or times of year when outbreaks last longer can improve resource allocation and response planning. This study also adds to the literature on healthcare outbreaks, with a focus on Toronto’s healthcare system.
 
-Why it matters paragraph
-
-Telegraphing paragraph: The remainder of this paper is structured as follows. @sec-data....
-
+The remainder of this paper is structured as follows: @sec-data covers the dataset used for analysis, @sec-model describes the model setup and methodology, @sec-results presents the results and their interpretation, and @sec-discussion discusses the findings and future research directions.
 
 # Data {#sec-data}
 
@@ -55,7 +57,7 @@ head(data, 5) |>
 
 There is 5387 observations in the orginal dataset and 1119 observations were removed that contained missing, invalid, or irrelivant data of the variables we're interested in. The data was first downloaded using `Python` [@citePython] and cleaned with the `pandas` package [@citePandas]. The cleaning process involved converting dates to a standardized datetime format, creating a "duration" variable representing the length of each outbreak, and extracting the month of the outbreak's start. Irrelevant columns were removed, and variables were renamed for clarity. Causative agents were grouped into broader categories, and rows with missing or invalid data were removed, including those with unidentifiable causative agents or certain outbreak settings. The final dataset was saved for further analysis.
 
-`R` [@citeR] is used for the generation of figures, graphs, and tables throughout this paper. Specifically, the `rstanarm` package [@rstanarm] was employed to fit the model. For data manipulation, the `dplyr` package [@dplyr] was utilized to clean and transform the data efficiently. The `caret` package [@caret] was used for model training, while `modelsummary` [@modelsummary] was used to produce concise tables summarizing the model output. The `loo` package [@loo] was used to perform leave-one-out cross-validation, which helped assess the model’s predictive performance. Finally, the package `ggplot2` is used to generate graphics and figures for this analysis.
+`R` [@citeR] is used for the generation of figures, graphs, and tables throughout this paper. Specifically, the `rstanarm` package [@rstanarm] was employed to fit the model. For data manipulation, the `dplyr` package [@dplyr] was utilized to clean and transform the data efficiently. The `caret` package [@caret] was used for model training, while `modelsummary` [@modelsummary] was used to produce concise tables summarizing the model output. The `loo` package [@loo] was used to perform leave-one-out cross-validation, which helped assess the model’s predictive performance. Finally, the package `ggplot2` is used to generate graphics and figures for this analysis. The starter code and the data analysis techniques used are from Telling Stories with Data (@textbook). 
 
 ## Measurement
 	
@@ -167,7 +169,7 @@ ggplot(outbreak_agent_count, aes(x = reorder(causative_agent, -count), y = count
 ```
 
 ### Month Outbreak Began
-The Month variable is numerical and records the calendar month when each outbreak started. It reflects seasonal trends and potential patterns in infection rates. This variable is extracted from the date where each outbreak began from the original dataset. 
+The Month variable is categorical and records the calendar month when each outbreak started as a name (e.g., Jan, Feb). It reflects seasonal trends and potential patterns in infection rates. This variable is extracted from the date where each outbreak began from the original dataset and converted from a number to the corresponding month name. 
 
 @fig-month shows the the occurance of outbreaks in each month, with winter months having siginifiantly more outbreaks compared to other months. This suggest that seasons have effects on outbreak occurances.
 
@@ -241,14 +243,13 @@ In the above model:
 - $\beta_3$ is the coefficient for the **month** when the outbreak started.
 - $\phi$ is the **dispersion parameter** that controls the degree of overdispersion in the negative binomial distribution.
 
-- All coefficients ($\beta_0, \beta_1, \beta_2, \beta_3$) are assigned **Normal(0, 2.5)** priors.
-- The dispersion parameter $\phi$ is assigned an **Exponential(1)** prior, reflecting our belief that the variance is greater than the mean.
+All coefficients ($\beta_0, \beta_1, \beta_2, \beta_3$) are assigned the prior of Normal(0, 2.5), which is the `rstanarm` package's default priors. The choice of  the prior is sufficient for the model in this analysis and is a common non-informative prior that allows for reasonable variability [@textbook]. The dispersion parameter $\phi$ is assigned an **Exponential(1)** prior, which reflects the observation that the variance is greater than the mean. Since we have categorical predictor variables, these priors allow the coefficients to adjust based on the data. 
+
 
 ## Model Selection
 
 ```{r, message = FALSE, echo = FALSE}
 #| label: load-models
-library(rstanarm)
 poisson_model <-
     readRDS(file = here::here("models/poisson_model.rds"))
 neg_binomial_model <- 
@@ -289,30 +290,50 @@ mae_table <- tibble(
 )
 
 mae_table |>
-  kable(col.names = c("Model", "Mean Absolute Error (MAE)")) 
+  kable(col.names = c("Model", "MAE")) |>
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+
 ```
 
 From @tbl-mae-comparison, the MAE for the Poisson model is 6.53, while the MAE for the Negative Binomial model is 6.52. The difference between the MAEs is minimal, suggesting that both models perform similarly in terms of prediction accuracy. However, the Negative Binomial model may still be preferred as it accounts for overdispersion, which is more appropriate for count data. The MAE of 6.52 means that, on average, the predicted outbreak duration from the Negative Binomial model deviates from the actual duration by approximately 6.52 days. In other words, for any given outbreak in the test data, the model's prediction of the outbreak's duration is off by around 6.5 days, either overestimating or underestimating the actual duration.
 
+In @fig-mcmc, the MCMC algorithm is also used to check for potential issues with the model. The trace plot is constructed using a subset of categorical values from each predictor variable, as there are many values for each category. As seen in the trace plot in @fig-mcmc (a), the lines bounce around but remain horizontal, with a nice overlap between the chains. This indicates that the chains have effectively explored the posterior distribution [@textbook]. The Rhat plot evaluates whether the chains have converged to a common distribution. As seen in the Rhat plot in @fig-mcmc (b), the values are close to 1 and fall below 1.1, suggesting no problems with convergence [@textbook]. Therefore, the model appears to be properly converged, and we do not need to remove or modify predictors, adjust the priors, or re-run the model.
+
 # Results
 
-Our results are summarized in @tbl-model-results.
+To determine the reference levels for the categorical data outbreak settings, causative agent, and month, the model automatically selects the first category of each factor based on alphabetical orders of the category names. The intercept represents that the baseline outbreak duration is 2.257 days when all predictors are at their reference levels. @fig-90-interval shows that the 
+
+## Outbreak Setting
+Outbreak setting is referenced based on "Hospital-Acute Care", we compare other categories with it to evaluate how each category influence the model:
+- Hospital-Chronic Care (0.047): Outbreaks in this setting last 0.047 days longer than Hospital-Acute Care.
+- Hospital-Psychiatric (-0.080): Outbreaks in psychiatric hospitals last 0.080 days shorter than Hospital-Acute Care.
+- LTCH (Long-Term Care Homes) (0.465): Outbreaks in LTCHs last 0.465 days longer than in Hospital-Acute Care.
+- Retirement Home (0.343): Outbreaks in retirement homes last 0.343 days longer than in Hospital-Acute Care.
+
+## Causative Agent
+Outbreak setting is referenced based on "Hospital-Acute Care", we compare other categories with it to evaluate how each category influence the model:
+
+
+Num. Obs. (3416): Based on 3416 observations.
+Algorithm (sampling): The model used Bayesian sampling for estimation.
 
 ```{r, message = FALSE, echo = FALSE}
-#| label: tbl-model-results
-#| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
+#| label: "fig-90-interval"
+#| fig-cap: "90 percent credibility interval for coefficients"
+tidy_neg_binomial <- tidy(neg_binomial_model, conf.int = TRUE, conf.level = 0.9)
 
-# modelsummary::modelsummary(
-#     list(
-#         "Model" = model
-#     ),
-#     statistic = "mad",
-#     fmt = 2
-# )
+ggplot(tidy_neg_binomial, aes(x = term, y = estimate, ymin = conf.low, ymax = conf.high)) +
+  geom_pointrange() +
+  coord_flip() +  
+  labs(
+    x = "Predictor",
+    y = "Coefficient Estimate"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 8),
+  )
 ```
-
-
-
 
 # Discussion
 
@@ -363,7 +384,7 @@ pp_check(neg_binomial_model) +
 
 ## Leave-One-Out (LOO) Cross Validation (CV) Comparison
 
-In @fig-loo-comparison, we compare LOO performance of the Poission model against the negative binomial model based on the expected log pointwise predictive density (ELPD) and find that the negative binomial model has a higher ELPD value.
+In @tbl-loo-comparison, we compare LOO performance of the Poission model against the negative binomial model based on the expected log pointwise predictive density (ELPD) and find that the negative binomial model has a higher ELPD value.
 
 ```{r, message = FALSE, echo = FALSE}
 #| label: tbl-loo-comparison
@@ -375,24 +396,40 @@ loo_comparison <- loo_compare(poisson_loo, neg_binomial_loo)
 loo_comparison
 ```
 
+## Model summary
+
+@tbl-model-summary presents a summary of the model used in the analysis, which includes the intercept and the coefficients for predictor variables, and the model fitting process. 
+
+```{r, message = FALSE, echo = FALSE}
+#| label: tbl-model-summary
+#| tbl-cap: "Explanatory model of outbreak duration for Model (1), the negative binomial model"
+tidied_neg = tidy(neg_binomial_model)
+glance_neg = glance(neg_binomial_model)
+
+msummary_out = list(tidy = tidied_neg,
+                    glance = glance_neg) 
+
+class(msummary_out) = 'modelsummary_list'
+
+modelsummary(
+    msummary_out, output = "kableExtra"
+) |>
+  kable_styling(font_size = 8)
+```
+
 ## Diagnostics
 
-<!-- ```{r}
-#| echo: false
-#| eval: true
-#| message: false
-#| warning: false
-#| label: fig-stanareyouokay
+@fig-mcmc presents the diagnostic plots for the MCMC algorithm used to estimate the parameters of our model. These plots are essential for assessing the convergence of the sampling process and ensuring the reliability of the Bayesian estimates.
+
+```{r, message = FALSE, echo = FALSE}
+#| label: fig-mcmc
 #| fig-cap: "Checking the convergence of the MCMC algorithm"
 #| fig-subcap: ["Trace plot", "Rhat plot"]
 #| layout-ncol: 2
+plot(neg_binomial_model, "trace", pars = c("(Intercept)", "outbreak_settingLTCH", "outbreak_settingRetirement Home", "causative_agentParainfluenza", "causative_agentNorovirus", "causative_agentEnterovirus/Rhinovirus", "monthJan", "monthJul", "monthDec"))
 
-plot(model, "trace")
-
-plot(model, "rhat")
-``` -->
-
-
+plot(neg_binomial_model, "rhat")
+```
 
 \newpage
 

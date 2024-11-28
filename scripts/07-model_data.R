@@ -54,4 +54,4 @@ neg_binomial_model <- stan_glm(
 
 # Save the models for later use
 saveRDS(poisson_model, file = "models/poisson_model.rds")
-saveRDS(neg_binomial_model, file = "models/neg_binom_model.rds")
+saveRDS(neg_binomial_model, file = "models/neg_binomial_model.rds")

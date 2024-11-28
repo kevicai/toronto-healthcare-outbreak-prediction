@@ -47,7 +47,11 @@ vignettes/*.pdf
 
 .venv
 
-/data
-
 */__pycache__
 */.pytest_cache
+
+*/paper.aux
+*/paper.tex
+*/paper.log
+*/paper_files
+*/paper_cache

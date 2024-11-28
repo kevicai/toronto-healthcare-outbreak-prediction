@@ -11,12 +11,12 @@
 import pandas as pd
 import numpy as np
 
-num_data = 500
+sample_size = 1000
 
 # Set random seed for reproducibility
-np.random.seed(853)
+np.random.seed(22)
 
-#### Simulate data ####
+#### Define Data Categories ####
 # Outbreak settings
 outbreak_settings = [
     "Hospital-Chronic Care",
@@ -37,29 +37,31 @@ causative_agent_groups = [
     "Respiratory syncytial virus",
 ]
 
-# Generate the data
+#### Simulate data ####
 outbreak_settings_sampled = np.random.choice(
     outbreak_settings,
-    size=num_data,
+    size=sample_size,
     replace=True,
 )
+
 causative_agents_sampled = np.random.choice(
     causative_agent_groups,
-    size=num_data,
+    size=sample_size,
     replace=True,
 )
+
 months_sampled = np.random.choice(
     list(range(1, 13)),
-    size=num_data,
+    size=sample_size,
     replace=True,
 )
-durations_sampled = np.random.randint(
-    3,
-    21,
-    size=num_data,
-)  # Random duration between 3 and 20 days
 
-# Create a polars DataFrame
+# Simulate durations using a normal distribution
+mean_duration = 14  
+std_duration = 14   
+durations_sampled = np.random.normal(loc=mean_duration, scale=std_duration, size=sample_size)
+
+# Create a Pandas DataFrame
 outbreak_data = pd.DataFrame(
     {
         "outbreak_setting": outbreak_settings_sampled,
@@ -68,7 +70,6 @@ outbreak_data = pd.DataFrame(
         "duration": durations_sampled,
     }
 )
-
 
 #### Save data ####
 # Write the simulated data to a CSV file

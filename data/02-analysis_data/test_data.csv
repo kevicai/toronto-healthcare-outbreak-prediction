@@ -1,0 +1,853 @@
+"outbreak_setting","causative_agent","month","duration"
+"LTCH","Coronavirus","Dec",13
+"Retirement Home","Influenza","Dec",17
+"LTCH","Coronavirus","Dec",9
+"LTCH","Metapneumovirus","Dec",11
+"LTCH","Respiratory syncytial virus","Dec",12
+"LTCH","Norovirus","Dec",7
+"LTCH","Enterovirus/Rhinovirus","Sep",11
+"LTCH","Enterovirus/Rhinovirus","Sep",41
+"LTCH","Enterovirus/Rhinovirus","Sep",7
+"LTCH","Enterovirus/Rhinovirus","Sep",11
+"LTCH","Enterovirus/Rhinovirus","Sep",8
+"LTCH","Enterovirus/Rhinovirus","Jul",10
+"LTCH","Enterovirus/Rhinovirus","Jul",16
+"Hospital-Chronic Care","Parainfluenza","Jun",9
+"Hospital-Acute Care","Parainfluenza","Jun",16
+"Hospital-Chronic Care","Norovirus","May",5
+"LTCH","Norovirus","May",16
+"LTCH","Influenza","May",5
+"Hospital-Acute Care","Influenza","Mar",6
+"LTCH","Parainfluenza","Mar",18
+"LTCH","Norovirus","Mar",15
+"LTCH","Respiratory syncytial virus","Mar",14
+"LTCH","Influenza","Mar",22
+"Hospital-Chronic Care","Influenza","Mar",6
+"LTCH","Influenza","Mar",12
+"LTCH","Influenza","Mar",14
+"Hospital-Acute Care","Influenza","Feb",3
+"Retirement Home","Respiratory syncytial virus","Feb",9
+"Hospital-Chronic Care","Influenza","Jan",8
+"LTCH","Enterovirus/Rhinovirus","Jan",14
+"LTCH","Enterovirus/Rhinovirus","Jan",7
+"LTCH","Coronavirus","Jan",13
+"LTCH","Norovirus","Jan",21
+"LTCH","Metapneumovirus","Jan",18
+"Retirement Home","Influenza","Dec",17
+"Hospital-Acute Care","Influenza","Dec",8
+"Hospital-Acute Care","Influenza","Dec",7
+"LTCH","Influenza","Dec",9
+"LTCH","Norovirus","Dec",14
+"LTCH","Respiratory syncytial virus","Dec",18
+"Hospital-Acute Care","Influenza","Dec",14
+"LTCH","Influenza","Dec",9
+"LTCH","Enterovirus/Rhinovirus","Dec",25
+"Retirement Home","Influenza","Dec",8
+"LTCH","Influenza","Nov",16
+"Hospital-Acute Care","Enterovirus/Rhinovirus","Nov",8
+"LTCH","Norovirus","Oct",8
+"LTCH","Enterovirus/Rhinovirus","Oct",13
+"LTCH","Norovirus","Sep",12
+"Hospital-Acute Care","Enterovirus/Rhinovirus","Aug",8
+"LTCH","Enterovirus/Rhinovirus","Aug",21
+"LTCH","Enterovirus/Rhinovirus","Aug",14
+"LTCH","Enterovirus/Rhinovirus","Aug",28
+"LTCH","Parainfluenza","Aug",17
+"LTCH","Enterovirus/Rhinovirus","Aug",9
+"Retirement Home","Enterovirus/Rhinovirus","Jul",13
+"LTCH","Enterovirus/Rhinovirus","Jul",24
+"LTCH","Enterovirus/Rhinovirus","Jun",9
+"LTCH","Parainfluenza","Jun",13
+"LTCH","Enterovirus/Rhinovirus","Jun",18
+"Hospital-Acute Care","Enterovirus/Rhinovirus","May",9
+"LTCH","Enterovirus/Rhinovirus","May",13
+"LTCH","Coronavirus","May",25
+"Hospital-Chronic Care","Enterovirus/Rhinovirus","Apr",3
+"LTCH","Enterovirus/Rhinovirus","Apr",10
+"LTCH","Coronavirus","Apr",14
+"LTCH","Metapneumovirus","Mar",18
+"LTCH","Influenza","Mar",21
+"LTCH","Influenza","Mar",14
+"LTCH","Respiratory syncytial virus","Mar",20
+"LTCH","Influenza","Mar",10
+"Hospital-Acute Care","Influenza","Mar",9
+"LTCH","Influenza","Mar",21
+"LTCH","Influenza","Mar",9
+"Hospital-Chronic Care","Influenza","Mar",16
+"Retirement Home","Influenza","Mar",16
+"LTCH","Influenza","Feb",17
+"Retirement Home","Norovirus","Feb",12
+"LTCH","Influenza","Feb",17
+"LTCH","Coronavirus","Feb",12
+"LTCH","Influenza","Feb",10
+"Retirement Home","Respiratory syncytial virus","Feb",14
+"LTCH","Influenza","Feb",10
+"Retirement Home","Influenza","Feb",9
+"LTCH","Influenza","Feb",12
+"LTCH","Influenza","Jan",15
+"LTCH","Norovirus","Jan",16
+"Retirement Home","Coronavirus","Jan",25
+"Hospital-Acute Care","Influenza","Jan",9
+"LTCH","Respiratory syncytial virus","Jan",9
+"Hospital-Acute Care","Respiratory syncytial virus","Jan",10
+"LTCH","Influenza","Jan",15
+"Hospital-Chronic Care","Influenza","Jan",13
+"Hospital-Acute Care","Influenza","Jan",8
+"LTCH","Influenza","Jan",10
+"Hospital-Acute Care","Influenza","Jan",11
+"Hospital-Acute Care","Influenza","Jan",12
+"LTCH","Influenza","Jan",17
+"LTCH","Influenza","Jan",16
+"LTCH","Respiratory syncytial virus","Jan",21
+"Hospital-Acute Care","Metapneumovirus","Jan",15
+"Hospital-Chronic Care","Influenza","Jan",9
+"LTCH","Influenza","Jan",18
+"Retirement Home","Influenza","Jan",11
+"Retirement Home","Influenza","Jan",12
+"LTCH","Influenza","Jan",13
+"Retirement Home","Respiratory syncytial virus","Jan",11
+"Hospital-Acute Care","Influenza","Jan",8
+"LTCH","Respiratory syncytial virus","Jan",17
+"LTCH","Influenza","Jan",19
+"Hospital-Chronic Care","Influenza","Jan",11
+"Hospital-Acute Care","Respiratory syncytial virus","Dec",8
+"LTCH","Respiratory syncytial virus","Dec",27
+"LTCH","Norovirus","Dec",9
+"Hospital-Acute Care","Influenza","Dec",14
+"Hospital-Acute Care","Influenza","Dec",8
+"Hospital-Chronic Care","Enterovirus/Rhinovirus","Oct",9
+"LTCH","Parainfluenza","Sep",10
+"LTCH","Parainfluenza","Jun",12
+"LTCH","Influenza","May",9
+"LTCH","Influenza","Apr",15
+"LTCH","Influenza","Apr",12
+"LTCH","Influenza","Apr",8
+"Hospital-Chronic Care","Influenza","Apr",11
+"Hospital-Chronic Care","Influenza","Apr",8
+"Hospital-Acute Care","Influenza","Mar",13
+"LTCH","Influenza","Mar",17
+"Retirement Home","Influenza","Mar",13
+"LTCH","Influenza","Mar",11
+"Hospital-Chronic Care","Influenza","Mar",10
+"LTCH","Influenza","Mar",7
+"LTCH","Influenza","Mar",18
+"Retirement Home","Influenza","Feb",7
+"Retirement Home","Influenza","Feb",11
+"Hospital-Acute Care","Influenza","Feb",7
+"LTCH","Influenza","Feb",9
+"Hospital-Chronic Care","Norovirus","Feb",9
+"LTCH","Influenza","Feb",13
+"Hospital-Acute Care","Norovirus","Feb",10
+"LTCH","Influenza","Feb",12
+"LTCH","Influenza","Feb",9
+"LTCH","Influenza","Feb",15
+"LTCH","Influenza","Feb",22
+"LTCH","Influenza","Feb",12
+"LTCH","Influenza","Feb",10
+"LTCH","Influenza","Feb",17
+"Hospital-Chronic Care","Influenza","Feb",25
+"Hospital-Chronic Care","Influenza","Feb",10
+"LTCH","Influenza","Jan",21
+"Hospital-Chronic Care","Influenza","Jan",15
+"LTCH","Influenza","Jan",19
+"LTCH","Influenza","Jan",15
+"LTCH","Influenza","Jan",20
+"LTCH","Influenza","Jan",18
+"LTCH","Influenza","Jan",8
+"LTCH","Respiratory syncytial virus","Jan",12
+"Hospital-Acute Care","Norovirus","Jan",9
+"LTCH","Influenza","Jan",15
+"LTCH","Influenza","Jan",28
+"LTCH","Influenza","Jan",15
+"LTCH","Influenza","Jan",28
+"Hospital-Chronic Care","Influenza","Jan",6
+"LTCH","Influenza","Jan",26
+"LTCH","Influenza","Jan",22
+"Hospital-Acute Care","Influenza","Jan",8
+"LTCH","Respiratory syncytial virus","Jan",16
+"LTCH","Norovirus","Jan",27
+"LTCH","Influenza","Dec",16
+"Hospital-Acute Care","Norovirus","Dec",14
+"LTCH","Metapneumovirus","Dec",21
+"LTCH","Norovirus","Dec",19
+"LTCH","Respiratory syncytial virus","Nov",14
+"LTCH","Enterovirus/Rhinovirus","Jul",8
+"LTCH","Metapneumovirus","Jun",15
+"Hospital-Acute Care","Parainfluenza","May",6
+"LTCH","Influenza","Apr",10
+"Retirement Home","Influenza","Apr",11
+"Retirement Home","Influenza","Mar",9
+"LTCH","Influenza","Mar",19
+"LTCH","Influenza","Mar",11
+"Hospital-Acute Care","Influenza","Mar",8
+"LTCH","Influenza","Mar",10
+"Retirement Home","Norovirus","Mar",15
+"LTCH","Influenza","Mar",8
+"LTCH","Norovirus","Mar",14
+"Hospital-Acute Care","Influenza","Mar",7
+"Hospital-Acute Care","Norovirus","Mar",9
+"Hospital-Acute Care","Influenza","Mar",8
+"LTCH","Enterovirus/Rhinovirus","Feb",13
+"LTCH","Influenza","Feb",9
+"Hospital-Chronic Care","Respiratory syncytial virus","Feb",12
+"LTCH","Respiratory syncytial virus","Feb",24
+"Hospital-Chronic Care","Influenza","Feb",10
+"LTCH","Respiratory syncytial virus","Feb",26
+"LTCH","Influenza","Feb",13
+"LTCH","Respiratory syncytial virus","Feb",17
+"Hospital-Chronic Care","Influenza","Feb",8
+"Hospital-Psychiatric","Influenza","Jan",7
+"LTCH","Influenza","Jan",11
+"Retirement Home","Influenza","Jan",15
+"Hospital-Acute Care","Influenza","Jan",8
+"LTCH","Influenza","Jan",11
+"Retirement Home","Influenza","Jan",11
+"LTCH","Influenza","Jan",7
+"LTCH","Respiratory syncytial virus","Jan",14
+"Retirement Home","COVID-19","Dec",31
+"Hospital-Acute Care","COVID-19","Dec",17
+"Retirement Home","COVID-19","Dec",43
+"LTCH","COVID-19","Dec",27
+"Hospital-Chronic Care","COVID-19","Dec",24
+"LTCH","COVID-19","Dec",43
+"LTCH","COVID-19","Dec",46
+"Hospital-Acute Care","COVID-19","Dec",41
+"LTCH","COVID-19","Dec",38
+"Hospital-Acute Care","COVID-19","Dec",12
+"LTCH","COVID-19","Dec",39
+"Hospital-Chronic Care","COVID-19","Dec",20
+"LTCH","COVID-19","Dec",54
+"LTCH","COVID-19","Dec",46
+"LTCH","COVID-19","Dec",49
+"Retirement Home","COVID-19","Dec",48
+"Hospital-Acute Care","COVID-19","Dec",18
+"LTCH","COVID-19","Dec",27
+"LTCH","COVID-19","Dec",37
+"LTCH","COVID-19","Dec",15
+"LTCH","COVID-19","Dec",67
+"LTCH","COVID-19","Dec",51
+"LTCH","COVID-19","Dec",54
+"LTCH","Coronavirus","Dec",7
+"Retirement Home","COVID-19","Dec",34
+"LTCH","COVID-19","Dec",58
+"LTCH","COVID-19","Dec",60
+"LTCH","COVID-19","Dec",54
+"LTCH","Enterovirus/Rhinovirus","Dec",19
+"Retirement Home","Enterovirus/Rhinovirus","Nov",15
+"LTCH","Coronavirus","Nov",27
+"LTCH","Enterovirus/Rhinovirus","Oct",10
+"Retirement Home","COVID-19","Oct",16
+"LTCH","Coronavirus","Oct",11
+"LTCH","Parainfluenza","Sep",15
+"LTCH","COVID-19","Sep",14
+"Retirement Home","Enterovirus/Rhinovirus","Aug",10
+"LTCH","Enterovirus/Rhinovirus","Aug",27
+"LTCH","COVID-19","Jul",39
+"Hospital-Acute Care","COVID-19","Jul",14
+"Hospital-Chronic Care","COVID-19","Jul",16
+"Hospital-Acute Care","COVID-19","Jul",17
+"Hospital-Acute Care","COVID-19","May",9
+"Hospital-Acute Care","COVID-19","May",18
+"Hospital-Chronic Care","COVID-19","May",23
+"LTCH","COVID-19","May",30
+"Hospital-Acute Care","COVID-19","May",28
+"LTCH","COVID-19","Apr",20
+"Hospital-Chronic Care","COVID-19","Apr",20
+"Hospital-Acute Care","COVID-19","Apr",25
+"LTCH","COVID-19","Apr",42
+"Hospital-Acute Care","COVID-19","Apr",34
+"LTCH","COVID-19","Apr",17
+"Hospital-Acute Care","COVID-19","Apr",8
+"Hospital-Acute Care","COVID-19","Apr",18
+"Hospital-Acute Care","COVID-19","Apr",23
+"LTCH","COVID-19","Apr",15
+"Hospital-Chronic Care","COVID-19","Apr",12
+"LTCH","COVID-19","Apr",28
+"Hospital-Acute Care","COVID-19","Apr",10
+"LTCH","COVID-19","Apr",15
+"Hospital-Acute Care","COVID-19","Apr",32
+"LTCH","COVID-19","Mar",27
+"Hospital-Acute Care","COVID-19","Mar",21
+"Hospital-Acute Care","COVID-19","Mar",10
+"LTCH","COVID-19","Mar",33
+"Hospital-Acute Care","COVID-19","Feb",11
+"LTCH","COVID-19","Feb",54
+"LTCH","COVID-19","Feb",66
+"Hospital-Chronic Care","COVID-19","Feb",26
+"Hospital-Acute Care","COVID-19","Feb",7
+"Retirement Home","COVID-19","Feb",20
+"Hospital-Acute Care","COVID-19","Feb",14
+"LTCH","COVID-19","Feb",18
+"LTCH","COVID-19","Feb",18
+"Hospital-Chronic Care","COVID-19","Jan",15
+"LTCH","COVID-19","Jan",26
+"LTCH","COVID-19","Jan",39
+"LTCH","COVID-19","Jan",23
+"Hospital-Chronic Care","COVID-19","Jan",19
+"Hospital-Acute Care","COVID-19","Jan",29
+"LTCH","COVID-19","Jan",38
+"Hospital-Acute Care","COVID-19","Jan",23
+"Retirement Home","COVID-19","Jan",27
+"Hospital-Acute Care","COVID-19","Jan",28
+"Retirement Home","COVID-19","Jan",36
+"Hospital-Chronic Care","COVID-19","Jan",20
+"LTCH","COVID-19","Jan",23
+"Hospital-Chronic Care","COVID-19","Jan",19
+"LTCH","COVID-19","Dec",20
+"LTCH","Respiratory syncytial virus","Dec",14
+"LTCH","COVID-19","Dec",11
+"LTCH","Norovirus","Dec",19
+"Retirement Home","COVID-19","Dec",11
+"Hospital-Chronic Care","Respiratory syncytial virus","Dec",6
+"Retirement Home","COVID-19","Dec",13
+"Hospital-Acute Care","COVID-19","Dec",9
+"LTCH","COVID-19","Dec",21
+"Retirement Home","Respiratory syncytial virus","Dec",9
+"Hospital-Chronic Care","COVID-19","Dec",10
+"Hospital-Chronic Care","COVID-19","Dec",20
+"LTCH","Influenza","Dec",20
+"Hospital-Acute Care","COVID-19","Dec",9
+"LTCH","COVID-19","Dec",18
+"LTCH","COVID-19","Dec",14
+"Hospital-Acute Care","COVID-19","Dec",12
+"LTCH","COVID-19","Dec",58
+"LTCH","COVID-19","Dec",18
+"Hospital-Acute Care","Influenza","Dec",14
+"LTCH","Influenza","Nov",9
+"LTCH","Influenza","Nov",14
+"LTCH","Influenza","Nov",16
+"Retirement Home","COVID-19","Nov",18
+"LTCH","COVID-19","Nov",10
+"Hospital-Chronic Care","COVID-19","Nov",19
+"LTCH","Influenza","Nov",26
+"LTCH","Influenza","Nov",14
+"LTCH","Influenza","Nov",9
+"Hospital-Acute Care","Influenza","Nov",16
+"LTCH","Respiratory syncytial virus","Nov",40
+"Hospital-Acute Care","COVID-19","Nov",15
+"LTCH","Respiratory syncytial virus","Nov",30
+"LTCH","COVID-19","Nov",28
+"Hospital-Chronic Care","COVID-19","Nov",21
+"LTCH","COVID-19","Nov",30
+"Hospital-Chronic Care","COVID-19","Nov",12
+"LTCH","COVID-19","Nov",47
+"Hospital-Acute Care","Influenza","Nov",13
+"Hospital-Acute Care","Respiratory syncytial virus","Nov",38
+"Hospital-Acute Care","COVID-19","Nov",15
+"Hospital-Chronic Care","Enterovirus/Rhinovirus","Oct",13
+"Hospital-Chronic Care","COVID-19","Oct",12
+"Hospital-Acute Care","COVID-19","Oct",12
+"Hospital-Chronic Care","COVID-19","Oct",9
+"Hospital-Acute Care","COVID-19","Oct",14
+"Retirement Home","COVID-19","Oct",19
+"Hospital-Chronic Care","COVID-19","Oct",5
+"Retirement Home","COVID-19","Oct",40
+"LTCH","COVID-19","Oct",24
+"Hospital-Chronic Care","COVID-19","Oct",17
+"Retirement Home","COVID-19","Oct",9
+"Hospital-Acute Care","COVID-19","Oct",13
+"LTCH","COVID-19","Oct",18
+"LTCH","COVID-19","Oct",10
+"LTCH","COVID-19","Oct",11
+"LTCH","COVID-19","Oct",15
+"Retirement Home","COVID-19","Oct",20
+"LTCH","COVID-19","Oct",30
+"Hospital-Chronic Care","COVID-19","Oct",12
+"LTCH","COVID-19","Oct",28
+"LTCH","COVID-19","Oct",37
+"LTCH","COVID-19","Sep",14
+"Hospital-Chronic Care","COVID-19","Sep",16
+"LTCH","COVID-19","Sep",21
+"Hospital-Acute Care","COVID-19","Sep",16
+"Hospital-Chronic Care","COVID-19","Sep",28
+"Retirement Home","COVID-19","Sep",10
+"LTCH","Enterovirus/Rhinovirus","Sep",9
+"Hospital-Chronic Care","COVID-19","Sep",10
+"Hospital-Chronic Care","COVID-19","Sep",13
+"LTCH","COVID-19","Sep",23
+"Retirement Home","COVID-19","Sep",24
+"Retirement Home","COVID-19","Sep",18
+"LTCH","COVID-19","Sep",18
+"LTCH","COVID-19","Sep",95
+"LTCH","Influenza","Sep",13
+"Retirement Home","COVID-19","Sep",14
+"LTCH","COVID-19","Sep",23
+"Retirement Home","COVID-19","Sep",11
+"LTCH","COVID-19","Sep",12
+"LTCH","Norovirus","Sep",10
+"LTCH","COVID-19","Aug",11
+"Hospital-Acute Care","COVID-19","Aug",16
+"Hospital-Chronic Care","COVID-19","Aug",28
+"LTCH","COVID-19","Aug",22
+"Hospital-Acute Care","COVID-19","Aug",15
+"Hospital-Chronic Care","COVID-19","Aug",12
+"Hospital-Chronic Care","COVID-19","Aug",15
+"Retirement Home","COVID-19","Aug",10
+"Hospital-Acute Care","COVID-19","Aug",13
+"Hospital-Chronic Care","COVID-19","Aug",8
+"Hospital-Acute Care","COVID-19","Aug",17
+"Retirement Home","COVID-19","Aug",16
+"LTCH","COVID-19","Aug",42
+"Retirement Home","COVID-19","Aug",22
+"LTCH","COVID-19","Aug",32
+"LTCH","COVID-19","Aug",21
+"LTCH","COVID-19","Jul",16
+"Hospital-Chronic Care","COVID-19","Jul",5
+"LTCH","COVID-19","Jul",25
+"Hospital-Chronic Care","COVID-19","Jul",11
+"Hospital-Acute Care","COVID-19","Jul",22
+"Hospital-Chronic Care","COVID-19","Jul",16
+"Hospital-Acute Care","COVID-19","Jul",9
+"LTCH","Norovirus","Jul",16
+"Hospital-Acute Care","COVID-19","Jul",13
+"Retirement Home","COVID-19","Jul",20
+"Hospital-Chronic Care","COVID-19","Jul",13
+"Retirement Home","COVID-19","Jul",15
+"LTCH","COVID-19","Jul",30
+"Hospital-Acute Care","COVID-19","Jul",11
+"Hospital-Acute Care","COVID-19","Jul",14
+"Retirement Home","COVID-19","Jul",64
+"LTCH","COVID-19","Jul",12
+"LTCH","COVID-19","Jul",20
+"LTCH","COVID-19","Jul",28
+"Hospital-Chronic Care","COVID-19","Jul",10
+"LTCH","COVID-19","Jul",15
+"LTCH","COVID-19","Jul",21
+"LTCH","COVID-19","Jul",35
+"Retirement Home","COVID-19","Jul",34
+"LTCH","COVID-19","Jul",43
+"LTCH","COVID-19","Jul",28
+"Hospital-Acute Care","COVID-19","Jul",9
+"Hospital-Psychiatric","COVID-19","Jul",25
+"Retirement Home","COVID-19","Jul",36
+"LTCH","COVID-19","Jul",36
+"LTCH","COVID-19","Jul",60
+"Retirement Home","Enterovirus/Rhinovirus","Jun",12
+"LTCH","COVID-19","Jun",28
+"Retirement Home","COVID-19","Jun",22
+"Hospital-Acute Care","Enterovirus/Rhinovirus","Jun",11
+"LTCH","COVID-19","Jun",8
+"LTCH","COVID-19","Jun",57
+"LTCH","COVID-19","Jun",13
+"LTCH","COVID-19","May",26
+"LTCH","COVID-19","May",9
+"LTCH","COVID-19","May",9
+"Retirement Home","COVID-19","May",14
+"LTCH","COVID-19","May",11
+"Hospital-Chronic Care","COVID-19","May",10
+"LTCH","Coronavirus","May",12
+"LTCH","Coronavirus","May",11
+"Retirement Home","COVID-19","May",16
+"LTCH","COVID-19","May",54
+"LTCH","COVID-19","May",6
+"Hospital-Psychiatric","COVID-19","Apr",23
+"LTCH","COVID-19","Apr",10
+"LTCH","COVID-19","Apr",17
+"Hospital-Psychiatric","COVID-19","Apr",13
+"Retirement Home","COVID-19","Apr",13
+"Hospital-Acute Care","COVID-19","Apr",15
+"LTCH","COVID-19","Apr",26
+"LTCH","COVID-19","Apr",6
+"Retirement Home","COVID-19","Apr",16
+"Hospital-Acute Care","COVID-19","Apr",16
+"LTCH","COVID-19","Apr",57
+"Hospital-Acute Care","COVID-19","Apr",19
+"LTCH","COVID-19","Apr",17
+"LTCH","COVID-19","Apr",25
+"Hospital-Chronic Care","COVID-19","Apr",12
+"Hospital-Chronic Care","COVID-19","Apr",10
+"Retirement Home","COVID-19","Apr",23
+"Hospital-Chronic Care","COVID-19","Apr",22
+"LTCH","COVID-19","Mar",11
+"Hospital-Acute Care","COVID-19","Mar",6
+"LTCH","COVID-19","Mar",63
+"Hospital-Psychiatric","COVID-19","Mar",10
+"LTCH","COVID-19","Mar",26
+"Hospital-Acute Care","COVID-19","Mar",1
+"LTCH","COVID-19","Mar",23
+"Hospital-Chronic Care","COVID-19","Mar",15
+"LTCH","COVID-19","Mar",29
+"LTCH","COVID-19","Feb",10
+"LTCH","COVID-19","Feb",51
+"LTCH","COVID-19","Feb",23
+"Hospital-Chronic Care","COVID-19","Feb",11
+"Hospital-Chronic Care","COVID-19","Feb",16
+"Hospital-Acute Care","COVID-19","Feb",16
+"Hospital-Acute Care","COVID-19","Feb",13
+"Hospital-Acute Care","COVID-19","Jan",11
+"Hospital-Acute Care","COVID-19","Jan",9
+"Hospital-Chronic Care","COVID-19","Jan",18
+"Hospital-Chronic Care","COVID-19","Jan",21
+"Hospital-Acute Care","COVID-19","Jan",21
+"Hospital-Acute Care","COVID-19","Jan",17
+"Hospital-Chronic Care","COVID-19","Jan",14
+"Hospital-Chronic Care","COVID-19","Jan",11
+"Hospital-Acute Care","COVID-19","Jan",9
+"Hospital-Acute Care","COVID-19","Jan",24
+"Hospital-Acute Care","COVID-19","Jan",14
+"Hospital-Acute Care","COVID-19","Jan",15
+"Hospital-Acute Care","COVID-19","Jan",12
+"Hospital-Acute Care","COVID-19","Jan",17
+"Hospital-Acute Care","COVID-19","Jan",23
+"Hospital-Chronic Care","COVID-19","Jan",12
+"LTCH","COVID-19","Jan",15
+"Hospital-Chronic Care","COVID-19","Jan",22
+"Hospital-Acute Care","COVID-19","Jan",37
+"LTCH","COVID-19","Jan",49
+"Hospital-Acute Care","COVID-19","Jan",16
+"Hospital-Chronic Care","COVID-19","Jan",24
+"LTCH","Parainfluenza","Dec",17
+"Retirement Home","COVID-19","Dec",16
+"Retirement Home","COVID-19","Dec",49
+"LTCH","COVID-19","Dec",21
+"Retirement Home","COVID-19","Dec",13
+"Retirement Home","COVID-19","Dec",12
+"Hospital-Chronic Care","COVID-19","Dec",10
+"Retirement Home","COVID-19","Dec",13
+"LTCH","Influenza","Dec",9
+"Retirement Home","COVID-19","Dec",8
+"Hospital-Chronic Care","COVID-19","Dec",7
+"LTCH","COVID-19","Dec",12
+"Hospital-Chronic Care","COVID-19","Dec",13
+"LTCH","COVID-19","Dec",25
+"Retirement Home","COVID-19","Dec",36
+"LTCH","Influenza","Dec",20
+"Hospital-Chronic Care","COVID-19","Dec",8
+"Hospital-Chronic Care","COVID-19","Dec",8
+"LTCH","COVID-19","Dec",11
+"Hospital-Chronic Care","COVID-19","Dec",10
+"LTCH","COVID-19","Dec",44
+"Hospital-Acute Care","COVID-19","Dec",18
+"LTCH","Influenza","Dec",15
+"LTCH","COVID-19","Dec",35
+"Hospital-Acute Care","COVID-19","Dec",17
+"LTCH","COVID-19","Dec",8
+"LTCH","COVID-19","Dec",8
+"LTCH","COVID-19","Dec",8
+"LTCH","Respiratory syncytial virus","Dec",14
+"Retirement Home","Influenza","Dec",6
+"Hospital-Chronic Care","COVID-19","Dec",7
+"LTCH","COVID-19","Dec",12
+"Retirement Home","COVID-19","Dec",14
+"LTCH","COVID-19","Dec",21
+"Retirement Home","COVID-19","Dec",9
+"Hospital-Chronic Care","COVID-19","Nov",15
+"Hospital-Acute Care","COVID-19","Nov",11
+"LTCH","Influenza","Nov",9
+"Hospital-Chronic Care","COVID-19","Nov",7
+"LTCH","COVID-19","Nov",16
+"LTCH","COVID-19","Nov",33
+"LTCH","COVID-19","Nov",24
+"LTCH","COVID-19","Nov",8
+"Retirement Home","COVID-19","Nov",11
+"Hospital-Chronic Care","COVID-19","Nov",9
+"Hospital-Chronic Care","COVID-19","Nov",7
+"LTCH","COVID-19","Nov",21
+"LTCH","COVID-19","Nov",10
+"Retirement Home","COVID-19","Nov",42
+"LTCH","COVID-19","Nov",18
+"Retirement Home","COVID-19","Nov",12
+"LTCH","COVID-19","Nov",12
+"LTCH","COVID-19","Nov",11
+"Hospital-Acute Care","COVID-19","Nov",15
+"Hospital-Psychiatric","COVID-19","Nov",17
+"Retirement Home","COVID-19","Nov",18
+"Hospital-Chronic Care","COVID-19","Nov",11
+"Hospital-Acute Care","COVID-19","Nov",28
+"LTCH","Influenza","Nov",18
+"LTCH","COVID-19","Nov",14
+"Hospital-Chronic Care","COVID-19","Nov",24
+"Hospital-Acute Care","COVID-19","Nov",8
+"LTCH","COVID-19","Nov",11
+"LTCH","COVID-19","Nov",7
+"LTCH","COVID-19","Nov",10
+"Retirement Home","COVID-19","Nov",8
+"LTCH","COVID-19","Oct",31
+"LTCH","COVID-19","Oct",20
+"LTCH","Enterovirus/Rhinovirus","Oct",18
+"LTCH","COVID-19","Oct",35
+"Hospital-Acute Care","COVID-19","Oct",19
+"LTCH","COVID-19","Oct",48
+"Retirement Home","COVID-19","Oct",10
+"LTCH","COVID-19","Oct",16
+"LTCH","COVID-19","Oct",6
+"LTCH","COVID-19","Oct",24
+"Hospital-Chronic Care","COVID-19","Oct",12
+"LTCH","COVID-19","Oct",17
+"LTCH","Enterovirus/Rhinovirus","Oct",19
+"LTCH","COVID-19","Oct",14
+"LTCH","Norovirus","Oct",12
+"Retirement Home","COVID-19","Oct",12
+"LTCH","COVID-19","Sep",25
+"Hospital-Acute Care","COVID-19","Sep",6
+"LTCH","Enterovirus/Rhinovirus","Sep",20
+"Hospital-Chronic Care","COVID-19","Sep",6
+"Retirement Home","COVID-19","Sep",46
+"Hospital-Chronic Care","COVID-19","Sep",20
+"LTCH","Enterovirus/Rhinovirus","Sep",11
+"LTCH","COVID-19","Sep",10
+"Hospital-Acute Care","COVID-19","Sep",6
+"LTCH","COVID-19","Sep",10
+"Retirement Home","COVID-19","Sep",22
+"Retirement Home","Enterovirus/Rhinovirus","Sep",5
+"LTCH","COVID-19","Sep",23
+"Retirement Home","COVID-19","Sep",9
+"LTCH","Enterovirus/Rhinovirus","Sep",12
+"LTCH","Enterovirus/Rhinovirus","Sep",20
+"LTCH","COVID-19","Sep",31
+"LTCH","COVID-19","Aug",13
+"Retirement Home","COVID-19","Aug",13
+"LTCH","Enterovirus/Rhinovirus","Aug",11
+"LTCH","COVID-19","Aug",24
+"LTCH","Enterovirus/Rhinovirus","Aug",14
+"LTCH","COVID-19","Aug",7
+"LTCH","Parainfluenza","Aug",20
+"LTCH","Parainfluenza","Aug",36
+"LTCH","Enterovirus/Rhinovirus","Aug",16
+"LTCH","COVID-19","Aug",15
+"LTCH","COVID-19","Aug",18
+"Retirement Home","COVID-19","Aug",20
+"LTCH","COVID-19","Aug",22
+"LTCH","Metapneumovirus","Aug",8
+"LTCH","Enterovirus/Rhinovirus","Aug",13
+"LTCH","Respiratory syncytial virus","Aug",10
+"LTCH","COVID-19","Jul",30
+"LTCH","Enterovirus/Rhinovirus","Jul",15
+"Retirement Home","COVID-19","Jul",9
+"LTCH","COVID-19","Jul",15
+"LTCH","COVID-19","Jul",13
+"LTCH","COVID-19","Jul",26
+"LTCH","Parainfluenza","Jul",16
+"LTCH","Enterovirus/Rhinovirus","Jul",17
+"LTCH","COVID-19","Jul",11
+"LTCH","COVID-19","Jun",12
+"Retirement Home","COVID-19","Jun",13
+"LTCH","COVID-19","Jun",16
+"Retirement Home","COVID-19","Jun",30
+"Retirement Home","COVID-19","Jun",14
+"Retirement Home","COVID-19","Jun",14
+"Retirement Home","COVID-19","Jun",10
+"Hospital-Acute Care","COVID-19","May",10
+"Hospital-Chronic Care","COVID-19","May",9
+"Hospital-Acute Care","COVID-19","May",17
+"Hospital-Acute Care","COVID-19","May",7
+"LTCH","COVID-19","May",22
+"Retirement Home","COVID-19","May",9
+"Hospital-Psychiatric","COVID-19","May",13
+"LTCH","COVID-19","May",14
+"Hospital-Acute Care","COVID-19","May",14
+"Retirement Home","Coronavirus","Apr",13
+"LTCH","Enterovirus/Rhinovirus","Apr",11
+"Retirement Home","COVID-19","Apr",8
+"LTCH","Metapneumovirus","Apr",14
+"Hospital-Chronic Care","COVID-19","Apr",8
+"Retirement Home","COVID-19","Apr",10
+"LTCH","Enterovirus/Rhinovirus","Apr",7
+"LTCH","Respiratory syncytial virus","Apr",12
+"Hospital-Chronic Care","COVID-19","Apr",8
+"LTCH","COVID-19","Apr",8
+"Retirement Home","Norovirus","Mar",25
+"LTCH","COVID-19","Mar",11
+"Retirement Home","COVID-19","Mar",11
+"Hospital-Chronic Care","COVID-19","Mar",14
+"LTCH","Metapneumovirus","Mar",17
+"LTCH","COVID-19","Mar",12
+"LTCH","Enterovirus/Rhinovirus","Mar",10
+"LTCH","Enterovirus/Rhinovirus","Feb",11
+"Hospital-Acute Care","COVID-19","Feb",7
+"LTCH","Parainfluenza","Feb",20
+"Retirement Home","COVID-19","Feb",15
+"LTCH","COVID-19","Feb",13
+"Retirement Home","COVID-19","Feb",8
+"LTCH","Enterovirus/Rhinovirus","Feb",11
+"LTCH","Enterovirus/Rhinovirus","Feb",4
+"LTCH","COVID-19","Feb",19
+"LTCH","Respiratory syncytial virus","Feb",23
+"LTCH","COVID-19","Feb",13
+"LTCH","COVID-19","Feb",25
+"LTCH","COVID-19","Feb",22
+"Hospital-Chronic Care","COVID-19","Feb",20
+"Retirement Home","Norovirus","Jan",13
+"LTCH","Respiratory syncytial virus","Jan",9
+"Hospital-Acute Care","COVID-19","Jan",5
+"LTCH","COVID-19","Jan",21
+"LTCH","Metapneumovirus","Jan",15
+"LTCH","COVID-19","Jan",20
+"Hospital-Acute Care","COVID-19","Jan",10
+"Hospital-Acute Care","COVID-19","Jan",10
+"LTCH","Parainfluenza","Jan",23
+"LTCH","Parainfluenza","Jan",8
+"LTCH","Coronavirus","Jan",11
+"Retirement Home","Respiratory syncytial virus","Jan",10
+"Retirement Home","Norovirus","Jan",15
+"LTCH","Respiratory syncytial virus","Jan",8
+"Hospital-Chronic Care","COVID-19","Jan",21
+"Retirement Home","COVID-19","Jan",17
+"LTCH","COVID-19","Jan",24
+"LTCH","Enterovirus/Rhinovirus","Jan",8
+"LTCH","Respiratory syncytial virus","Jan",10
+"Hospital-Chronic Care","COVID-19","Jan",11
+"LTCH","COVID-19","Jan",31
+"Retirement Home","Norovirus","Jan",14
+"LTCH","Respiratory syncytial virus","Jan",10
+"Retirement Home","Respiratory syncytial virus","Jan",6
+"Hospital-Chronic Care","COVID-19","Jan",13
+"LTCH","Parainfluenza","Jan",22
+"LTCH","COVID-19","Jan",22
+"Retirement Home","COVID-19","Jan",15
+"Hospital-Chronic Care","Respiratory syncytial virus","Jan",9
+"Retirement Home","COVID-19","Jan",19
+"Hospital-Chronic Care","COVID-19","Nov",8
+"LTCH","COVID-19","Nov",10
+"LTCH","COVID-19","Nov",12
+"LTCH","COVID-19","Oct",15
+"LTCH","COVID-19","Oct",15
+"Retirement Home","Enterovirus/Rhinovirus","Oct",12
+"Hospital-Chronic Care","COVID-19","Oct",22
+"LTCH","COVID-19","Oct",36
+"LTCH","COVID-19","Oct",18
+"Hospital-Acute Care","COVID-19","Oct",7
+"LTCH","Coronavirus","Oct",5
+"LTCH","Enterovirus/Rhinovirus","Oct",5
+"Hospital-Chronic Care","Enterovirus/Rhinovirus","Oct",6
+"Retirement Home","COVID-19","Oct",6
+"Retirement Home","Enterovirus/Rhinovirus","Sep",9
+"Hospital-Acute Care","COVID-19","Sep",7
+"LTCH","COVID-19","Sep",13
+"LTCH","COVID-19","Sep",7
+"LTCH","COVID-19","Sep",18
+"LTCH","Enterovirus/Rhinovirus","Sep",11
+"LTCH","Enterovirus/Rhinovirus","Sep",9
+"LTCH","COVID-19","Sep",13
+"Hospital-Acute Care","COVID-19","Sep",7
+"Hospital-Chronic Care","COVID-19","Sep",7
+"Hospital-Chronic Care","COVID-19","Sep",7
+"LTCH","COVID-19","Sep",13
+"LTCH","COVID-19","Sep",18
+"LTCH","Parainfluenza","Sep",14
+"LTCH","COVID-19","Sep",22
+"LTCH","Parainfluenza","Sep",21
+"LTCH","COVID-19","Sep",13
+"Hospital-Chronic Care","COVID-19","Sep",13
+"Retirement Home","COVID-19","Sep",21
+"LTCH","COVID-19","Sep",17
+"LTCH","COVID-19","Sep",18
+"LTCH","COVID-19","Sep",20
+"LTCH","COVID-19","Sep",38
+"Hospital-Psychiatric","COVID-19","Aug",8
+"Retirement Home","COVID-19","Aug",11
+"LTCH","Parainfluenza","Aug",8
+"Hospital-Psychiatric","COVID-19","Aug",7
+"LTCH","COVID-19","Aug",13
+"LTCH","COVID-19","Aug",21
+"LTCH","Enterovirus/Rhinovirus","Aug",8
+"Hospital-Acute Care","COVID-19","Aug",13
+"LTCH","Enterovirus/Rhinovirus","Aug",6
+"Hospital-Chronic Care","COVID-19","Aug",12
+"Retirement Home","COVID-19","Aug",10
+"LTCH","COVID-19","Aug",24
+"Hospital-Chronic Care","COVID-19","Aug",10
+"Retirement Home","COVID-19","Aug",8
+"LTCH","COVID-19","Aug",11
+"Hospital-Acute Care","COVID-19","Aug",8
+"Hospital-Acute Care","Parainfluenza","Jul",15
+"LTCH","COVID-19","Jul",8
+"LTCH","COVID-19","Jul",18
+"LTCH","COVID-19","Jul",7
+"Hospital-Acute Care","Metapneumovirus","Jul",4
+"LTCH","COVID-19","Jul",9
+"LTCH","Enterovirus/Rhinovirus","Jul",14
+"LTCH","Influenza","Jul",9
+"Hospital-Chronic Care","COVID-19","Jul",7
+"LTCH","COVID-19","Jul",15
+"LTCH","COVID-19","Jul",16
+"LTCH","Enterovirus/Rhinovirus","Jul",6
+"LTCH","Enterovirus/Rhinovirus","Jul",12
+"Hospital-Chronic Care","COVID-19","Jun",8
+"Hospital-Chronic Care","COVID-19","Jun",16
+"Hospital-Chronic Care","COVID-19","Jun",13
+"Hospital-Chronic Care","COVID-19","Jun",8
+"LTCH","Parainfluenza","Jun",9
+"Retirement Home","COVID-19","Jun",7
+"Retirement Home","COVID-19","Jun",9
+"LTCH","Coronavirus","Jun",13
+"LTCH","COVID-19","Jun",14
+"LTCH","COVID-19","May",16
+"LTCH","COVID-19","May",21
+"Hospital-Chronic Care","COVID-19","May",8
+"Retirement Home","COVID-19","May",8
+"Hospital-Acute Care","COVID-19","May",9
+"Retirement Home","COVID-19","May",9
+"Retirement Home","COVID-19","May",8
+"LTCH","COVID-19","May",16
+"LTCH","Parainfluenza","May",10
+"LTCH","COVID-19","May",14
+"LTCH","COVID-19","May",15
+"Hospital-Acute Care","COVID-19","May",8
+"LTCH","Coronavirus","May",8
+"Retirement Home","Parainfluenza","May",12
+"LTCH","Coronavirus","Apr",9
+"LTCH","Coronavirus","Apr",16
+"LTCH","Coronavirus","Apr",10
+"LTCH","COVID-19","Apr",7
+"Hospital-Acute Care","COVID-19","Apr",15
+"Retirement Home","Metapneumovirus","Apr",10
+"Retirement Home","Coronavirus","Apr",17
+"LTCH","Parainfluenza","Apr",5
+"LTCH","Metapneumovirus","Apr",9
+"Retirement Home","Norovirus","Apr",17
+"LTCH","Enterovirus/Rhinovirus","Apr",8
+"LTCH","COVID-19","Apr",14
+"LTCH","COVID-19","Apr",21
+"Hospital-Acute Care","Influenza","Apr",6
+"LTCH","Parainfluenza","Apr",18
+"LTCH","Norovirus","Apr",11
+"LTCH","Coronavirus","Mar",15
+"Retirement Home","Influenza","Mar",6
+"LTCH","Metapneumovirus","Mar",6
+"LTCH","Coronavirus","Mar",8
+"Hospital-Psychiatric","COVID-19","Mar",8
+"Hospital-Acute Care","Influenza","Mar",8
+"LTCH","COVID-19","Mar",14
+"Retirement Home","Coronavirus","Mar",9
+"Hospital-Chronic Care","Metapneumovirus","Mar",13
+"LTCH","COVID-19","Feb",8
+"LTCH","Influenza","Feb",15
+"LTCH","Coronavirus","Feb",24
+"LTCH","COVID-19","Feb",7
+"Retirement Home","COVID-19","Feb",9
+"LTCH","Influenza","Feb",25
+"Retirement Home","COVID-19","Feb",10
+"LTCH","Coronavirus","Feb",16
+"Hospital-Chronic Care","Influenza","Feb",6
+"LTCH","COVID-19","Feb",10
+"Retirement Home","COVID-19","Jan",12
+"LTCH","COVID-19","Jan",17
+"LTCH","COVID-19","Jan",25
+"Retirement Home","Influenza","Jan",10
+"LTCH","Coronavirus","Jan",13
+"LTCH","COVID-19","Jan",13
+"Hospital-Acute Care","COVID-19","Jan",7
+"LTCH","COVID-19","Jan",12
+"LTCH","Influenza","Jan",15
+"Hospital-Chronic Care","Influenza","Jan",9
+"LTCH","COVID-19","Jan",9
+"LTCH","COVID-19","Jan",8
+"LTCH","Influenza","Jan",17
+"Retirement Home","COVID-19","Jan",24
+"LTCH","COVID-19","Jan",7
+"Hospital-Chronic Care","COVID-19","Jan",8
+"Hospital-Acute Care","Respiratory syncytial virus","Jan",12
+"Hospital-Acute Care","COVID-19","Jan",14
+"LTCH","COVID-19","Jan",30
+"LTCH","Respiratory syncytial virus","Jan",21
+"LTCH","COVID-19","Jan",23
+"Retirement Home","COVID-19","Jan",12
+"LTCH","Influenza","Jan",11
+"LTCH","Influenza","Jan",14
+"LTCH","COVID-19","Jan",7
+"LTCH","COVID-19","Jan",26
+"Retirement Home","COVID-19","Jan",13
+"LTCH","COVID-19","Jan",33
+"Hospital-Psychiatric","COVID-19","Jan",13
+"Hospital-Chronic Care","COVID-19","Jan",8

@@ -29,18 +29,18 @@ test_data <- test_data |>
   )
 
 # # Posterior predictive checks
-# pp_check(poisson_model) +
-#   theme(legend.position = "bottom")
+pp_check(poisson_model) +
+  theme(legend.position = "bottom")
 
-# pp_check(neg_binomial_model) +
-#   theme(legend.position = "bottom")
+pp_check(neg_binomial_model) +
+  theme(legend.position = "bottom")
 
 # # Compare the models using LOO (Leave-One-Out Cross Validation)
-# poisson_loo <- loo(poisson_model, cores = 2)
-# neg_binomial_loo <- loo(neg_binomial_model, cores = 2)
+poisson_loo <- loo(poisson_model, cores = 2)
+neg_binomial_loo <- loo(neg_binomial_model, cores = 2)
 
-# loo_comparison <- loo_compare(poisson_loo, neg_binomial_loo)
-# loo_comparison
+loo_comparison <- loo_compare(poisson_loo, neg_binomial_loo)
+loo_comparison
 
 # Make predictions on the test data
 poisson_pred <- predict(poisson_model, newdata = test_data, type = "response")
