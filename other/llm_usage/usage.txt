@@ -1,32 +1,1330 @@
-LLM: ChatGPT-4.
-Date: 2 January 2024
+how to setup python venv
+
+3/3
+
+ChatGPT said:
+ChatGPT
+Setting up a Python virtual environment (venv) allows you to isolate dependencies for a project. Here's how to set it up:
+
+Steps to Set Up a Python Virtual Environment
+Ensure Python is Installed
+Check if Python is installed on your system:
+
+bash
+Copy code
+python --version
+or
+
+bash
+Copy code
+python3 --version
+Navigate to Your Project Directory
+Move to the directory where you want to set up the virtual environment:
+
+bash
+Copy code
+cd /path/to/your/project
+Create a Virtual Environment
+Run the following command to create a virtual environment:
+
+bash
+Copy code
+python -m venv venv
+Replace python with python3 if that's how Python is invoked on your system.
+The second venv is the name of the environment folder (you can name it anything, but venv is common).
+
+Activate the Virtual Environment
+
+On Linux/MacOS:
+bash
+Copy code
+source venv/bin/activate
+On Windows (Command Prompt):
+cmd
+Copy code
+venv\Scripts\activate
+On Windows (PowerShell):
+powershell
+Copy code
+.\venv\Scripts\Activate.ps1
+After activation, your terminal prompt should include (venv).
+
+Install Packages
+With the environment active, use pip to install dependencies:
+
+bash
+Copy code
+pip install package_name
+For example:
+
+bash
+Copy code
+pip install requests
+Save Dependencies
+To save the installed packages to a requirements.txt file:
+
+bash
+Copy code
+pip freeze > requirements.txt
+Deactivate the Virtual Environment
+When you're done, deactivate the environment by typing:
+
+bash
+Copy code
+deactivate
+Re-activate Later
+To return to the virtual environment in the future, navigate to the project directory and run the appropriate activation command (step 4).
+
+Common Commands Cheat Sheet
+Create venv: python -m venv venv
+Activate venv:
+Linux/Mac: source venv/bin/activate
+Windows: venv\Scripts\activate
+Deactivate: deactivate
+Install packages: pip install <package>
+Save dependencies: pip freeze > requirements.txt
+Load dependencies: pip install -r requirements.txt
+Let me know if you need further clarification!
 
 
-User
-Can you make a generic fun background rectangular image with the only text being "STA302"
+
+
+
+
+You said:
+drop columns where value equals pandas
+
+2/2
+
+ChatGPT said:
+ChatGPT
+To drop rows in a Pandas DataFrame where a specific column has a value equal to a target value, you can use the pandas.DataFrame.drop method or a filtering approach. Here's how you can do it:
+
+Example: Dropping Rows Based on Column Value
+python
+Copy code
+import pandas as pd
+
+# Example DataFrame
+data = {
+    'A': [1, 2, 3, 4],
+    'B': ['pandas', 'numpy', 'pandas', 'scipy']
+}
+df = pd.DataFrame(data)
+
+print("Original DataFrame:")
+print(df)
+
+# Drop rows where column 'B' has the value 'pandas'
+df_filtered = df[df['B'] != 'pandas']
+
+print("\nDataFrame after dropping rows where B == 'pandas':")
+print(df_filtered)
+Explanation:
+df['B'] != 'pandas' creates a Boolean mask where rows with B equal to 'pandas' are False.
+df[df['B'] != 'pandas'] filters out the rows where the condition is False.
+Alternative Approach Using drop Method
+If you want to use the drop method:
+
+python
+Copy code
+df_filtered = df.drop(df[df['B'] == 'pandas'].index)
+
+print("\nDataFrame after dropping rows where B == 'pandas' using `drop`:")
+print(df_filtered)
+Output:
+Original DataFrame:
+
+css
+Copy code
+   A       B
+0  1  pandas
+1  2   numpy
+2  3  pandas
+3  4    scipy
+After dropping rows:
+
+css
+Copy code
+   A       B
+1  2   numpy
+3  4    scipy
+Both methods achieve the same result. Choose the one that suits your style or specific use case!
+
+
+
+
+
+
+You said:
+fix grammar
+@fig-setting-count illustrates the different types of outbreak settings in the dataset, where "LTCH" stands for "Long-Term Care Hospital".
+ChatGPT said:
+ChatGPT
+Here’s a grammatically improved version of your sentence:
+
+Figure @fig-setting-count illustrates the various types of outbreak settings in the dataset, where "LTCH" stands for "Long-Term Care Hospital".
+
+
+
+
+
+
+You said:
+Following principles from "Telling Stories with Data" [@textbook], we consider how the characteristics of outbreaks, such as the type of healthcare institute, the causitive agent, and month the outbreak began, influence their durations. 
+
+fix grammar
+ChatGPT said:
+ChatGPT
+Here’s the grammatically corrected version of your sentence:
+
+Following the principles from "Telling Stories with Data" [@textbook], we examine how the characteristics of outbreaks, such as the type of healthcare institution, the causative agent, and the month the outbreak began, influence their durations.
+
+
+
+
+
+
+You said:
+make the output into two tables
+
+library(broom.mixed)
+library(modelsummary)
+tidied_neg = tidy(neg_binomial_model)
+glance_neg = glance(neg_binomial_model)
+
+msummary_out = list(tidy = tidied_neg,
+                    glance = glance_neg) 
+class(msummary_out) = 'modelsummary_list'
+
+modelsummary(
+    msummary_out,
+)
+ChatGPT said:
+ChatGPT
+The modelsummary package in R allows for flexible presentation of model summaries. To output your results into two separate tables (one for tidy output and another for glance output), you can split the display like this:
+
+Code to Output Two Separate Tables
+R
+Copy code
+# Load required libraries
+library(broom.mixed)
+library(modelsummary)
+
+# Tidy and glance outputs
+tidied_neg = tidy(neg_binomial_model)
+glance_neg = glance(neg_binomial_model)
+
+# Create separate tables
+modelsummary(
+    tidied_neg,
+    title = "Tidy Output of Negative Binomial Model"
+)
+
+modelsummary(
+    glance_neg,
+    title = "Glance Output of Negative Binomial Model"
+)
+Explanation:
+tidy Output Table: This table contains parameter estimates, standard errors, p-values, etc.
+
+glance Output Table: This table provides a summary of model-level statistics, such as AIC, BIC, log-likelihood, etc.
+
+Separate Tables: Each call to modelsummary creates its own table with a title for clarity.
+
+Let me know if you need additional customization!
+
+
+
+
+
+
+You said:
+{r, message = FALSE, echo = FALSE}
+#| label: tbl-model-summary
+#| tbl-cap: "Explanatory model of outbreak duration"
+library(broom.mixed)
+library(modelsummary)
+tidied_neg = tidy(neg_binomial_model)
+glance_neg = glance(neg_binomial_model)
+
+msummary_out = list(tidy = tidied_neg,
+                    glance = glance_neg) 
+class(msummary_out) = 'modelsummary_list'
+modelsummary(
+    msummary_out,
+)
+
+what to do if the modelsummary table is cutoff of the page
+ChatGPT said:
+ChatGPT
+If your modelsummary table is being cut off on the page in an RMarkdown document, you can take the following steps to ensure the table fits properly:
+
+1. Adjust Table Output Options
+Modify the output format to better fit within the page by using a more compact format or by adjusting the column widths.
+
+Use kableExtra for LaTeX/PDF Output
+If you're rendering to PDF, kableExtra can help you control the table's appearance:
+
+r
+Copy code
+library(kableExtra)
+modelsummary(
+  msummary_out,
+  output = "latex"
+) %>%
+  kable_styling(latex_options = c("scale_down"))
+The scale_down option will automatically scale the table to fit within the page.
+
+2. Rotate or Adjust Columns
+If the table is too wide, consider rotating it using the tabularonly environment or landscape mode in LaTeX:
+
+r
+Copy code
+modelsummary(
+  msummary_out,
+  output = "latex"
+) %>%
+  kable_styling(latex_options = c("scale_down", "landscape"))
+3. Split the Table
+For better readability, split the tidy and glance outputs into two separate tables:
+
+r
+Copy code
+modelsummary(
+  tidied_neg,
+  title = "Tidy Output of Negative Binomial Model",
+  output = "latex"
+)
+
+modelsummary(
+  glance_neg,
+  title = "Glance Output of Negative Binomial Model",
+  output = "latex"
+)
+4. Adjust Font Size
+Reduce the font size of the table:
+
+r
+Copy code
+modelsummary(
+  msummary_out,
+  output = "latex"
+) %>%
+  kable_styling(font_size = 8)
+5. Change Table Alignment
+For Word or HTML outputs, you can set the alignment of the table:
+
+r
+Copy code
+modelsummary(
+  msummary_out,
+  output = "html",
+  align = "left"
+)
+6. Page Breaks for PDF
+Insert a page break before or after the table to ensure proper alignment:
+
+r
+Copy code
+#| results: "asis"
+cat("\\newpage\n")
+modelsummary(
+    msummary_out,
+    output = "latex"
+)
+By implementing these adjustments, you should be able to display your modelsummary table properly without it being cut off. Let me know if you need further help!
+
+
+
+
+
+
+You said:
+Error in kable_styling():
+! could not find function "kable_styling"
+Backtrace:
+  1. global .main()
+  2. execute(...)
+  3. rmarkdown::render(...)
+  4. knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet)
+  5. knitr:::process_file(text, output)
+ChatGPT said:
+ChatGPT
+The error indicates that the kableExtra package (which provides the kable_styling function) is either not installed or not loaded. Here's how to fix this issue:
+
+1. Install the kableExtra Package
+Install the kableExtra package to access the kable_styling function:
+
+r
+Copy code
+install.packages("kableExtra")
+2. Load the Package
+After installation, load the package at the beginning of your script or RMarkdown document:
+
+r
+Copy code
+library(kableExtra)
+3. Ensure Compatibility
+The kableExtra package works with LaTeX (for PDF output) or HTML formats. Make sure your RMarkdown output format is compatible:
+
+For PDF output, ensure you have a LaTeX distribution installed (e.g., TeX Live, MikTeX, TinyTeX). If not, install TinyTeX:
+r
+Copy code
+install.packages("tinytex")
+tinytex::install_tinytex()
+For HTML output, kableExtra works natively.
+4. Example of Proper Usage
+Here’s how to use kable_styling after loading kableExtra:
+
+r
+Copy code
+library(kableExtra)
+library(modelsummary)
+
+# Example tidy and glance output
+tidied_neg = tidy(neg_binomial_model)
+glance_neg = glance(neg_binomial_model)
+
+# Model summary with kableExtra styling
+modelsummary(
+  tidied_neg,
+  output = "latex"
+) %>%
+  kable_styling(latex_options = c("scale_down"))
+5. Alternative Without kableExtra
+If you prefer not to use kableExtra, adjust the table output directly within modelsummary:
+
+r
+Copy code
+modelsummary(
+  msummary_out,
+  output = "latex",
+  title = "Explanatory Model of Outbreak Duration"
+)
+This approach works without additional styling but avoids issues caused by missing kableExtra.
+
+Let me know if this resolves the problem!
+
+
+
+
+
+
+You said:
+{r, message = FALSE, echo = FALSE}
+#| label: tbl-model-summary
+#| tbl-cap: "Explanatory model of outbreak duration"
+library(broom.mixed)
+library(modelsummary)
+library(kableExtra)
+
+tidied_neg = tidy(neg_binomial_model)
+glance_neg = glance(neg_binomial_model)
+
+msummary_out = list(tidy = tidied_neg,
+                    glance = glance_neg) 
+class(msummary_out) = 'modelsummary_list'
+modelsummary(
+    msummary_out, output = "kableExtra"
+) |>
+  kable_styling(font_size = 8)
+
+how to make modelsummary table header custom name like "duration"
+ChatGPT said:
+ChatGPT
+To customize the header names of a modelsummary table, you can modify the column names of the data frames (tidied_neg or glance_neg) before passing them to modelsummary. Here's how to rename a column, such as changing it to "Duration":
+
+Adjusting Column Names
+r
+Copy code
+library(broom.mixed)
+library(modelsummary)
+library(kableExtra)
+
+# Tidy and glance outputs
+tidied_neg = tidy(neg_binomial_model)
+glance_neg = glance(neg_binomial_model)
+
+# Rename columns
+names(tidied_neg)[names(tidied_neg) == "term"] <- "Duration"
+names(glance_neg)[names(glance_neg) == "logLik"] <- "Log-Likelihood"
+
+# Combine for modelsummary
+msummary_out = list(tidy = tidied_neg,
+                    glance = glance_neg) 
+class(msummary_out) = 'modelsummary_list'
+
+# Generate table with custom header
+modelsummary(
+    msummary_out,
+    output = "kableExtra"
+) |>
+  kable_styling(font_size = 8)
+Explanation:
+Renaming Columns:
+
+names(tidied_neg)[names(tidied_neg) == "term"] <- "Duration" renames the column term to Duration.
+You can repeat this for other columns as needed.
+Custom Table Headers: Renaming the columns ensures the desired header names appear in the table output.
+
+Final Table Styling: The renamed columns are reflected in the final modelsummary table.
+
+This approach works seamlessly for both tidy and glance outputs. Let me know if you need further adjustments!
+
+
+
+
+
+
+You said:
+currently the name is Model 1
+ChatGPT said:
+ChatGPT
+The column header "Model 1" in a modelsummary table comes from the default behavior of the package when listing models. To customize this name (e.g., to "Duration"), you can use the coef_rename argument or adjust the names attribute of the modelsummary_list.
+
+Here’s how to customize the model name:
+
+Customize Model Name
+r
+Copy code
+library(broom.mixed)
+library(modelsummary)
+library(kableExtra)
+
+# Example tidy and glance outputs
+tidied_neg = tidy(neg_binomial_model)
+glance_neg = glance(neg_binomial_model)
+
+# Combine outputs into a list
+msummary_out = list(tidy = tidied_neg, glance = glance_neg)
+class(msummary_out) = 'modelsummary_list'
+
+# Rename the model column header
+names(msummary_out) <- c("Duration")  # Set your custom header
+
+# Generate the table
+modelsummary(
+    msummary_out,
+    output = "kableExtra"
+) |>
+  kable_styling(font_size = 8)
+Explanation:
+Rename Models: Use names(msummary_out) to rename the headers associated with models.
+
+Replace "Duration" with your desired column header.
+Final Output: The table will now use "Duration" as the header instead of the default "Model 1."
+
+Let me know if this resolves your issue!
+
+
+
+
+
+
+You said:
+#### Preamble ####
+# Purpose: Cleans the raw outbreak data
+# Author: Kevin Cai
+# Date: Dec 1, 2024
+# Contact: kev.cai@mail.utoronto.ca
+# License: MIT
+# Pre-requisites:
+# - 02-download_data.py
+# - Install requirements.txt Python libraries
+
+import pandas as pd
+import os
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+input_dir = os.path.join(script_dir, "../data/01-raw_data")
+output_dir = os.path.join(script_dir, "../data/02-analysis_data")
+
+# Combine 2016 to 2024 files
+filenames = [os.path.join(input_dir, f"{year}-data.csv") for year in range(2016, 2025)]
+
+# Initialize an empty list for DataFrames
+dataframes = []
+
+# Read each file into a DataFrame and append it to the list
+for filename in filenames:
+    if os.path.exists(filename):
+        df = pd.read_csv(filename)
+        dataframes.append(df)
+    else:
+        print(f"File {filename} does not exist.")
+
+# Combine all DataFrames into one
+combined_df = pd.concat(dataframes, ignore_index=True)
+
+# Convert time to datetime format
+combined_df["Date Outbreak Began"] = pd.to_datetime(
+    combined_df["Date Outbreak Began"], format="%Y-%m-%d", errors="coerce"
+)
+combined_df["Date Declared Over"] = pd.to_datetime(
+    combined_df["Date Declared Over"], format="%Y-%m-%d", errors="coerce"
+)
+
+# Calculate the difference in days and create a new column
+combined_df["duration"] = (
+    combined_df["Date Declared Over"] - combined_df["Date Outbreak Began"]
+).dt.days
+
+# Extract the month of the start of the outbreak
+combined_df["month"] = combined_df["Date Outbreak Began"].dt.month
+
+# Rename variables
+combined_df["Main Causative Agent"] = combined_df["Causative Agent-1"]
+combined_df["outbreak_setting"] = combined_df["Outbreak Setting"]
+
+# Select required columns
+df = combined_df[
+    [
+        "outbreak_setting",
+        "Main Causative Agent",
+        "month",
+        "duration",
+    ]
+]
+
+# Define grouping rules:
+group_mapping = {
+    "Influenza": [
+        "Influenza A ((H1N1)pdm09)",
+        "Influenza A (H1)",
+        "Influenza A (H1N1)",
+        "Influenza A (H3)",
+        "Influenza A (H3N2)",
+        "Influenza A (Not subtyped)",
+        "Influenza A (H3)",
+        "Influenza A (H3), Parainfluenza type 2",
+        "Influenza A (H3), Parainfluenza type 1",
+        "Influenza A and B",
+        "Influenza B",
+    ],
+    "Respiratory syncytial virus": [
+        "Respiratory syncytial virus",
+    ],
+    "Metapneumovirus": [
+        "Metapneumovirus",
+    ],
+    "Enterovirus/Rhinovirus": [
+        "Rhinovirus",
+        "Enterovirus",
+        "Enterovirus/ Rhinovirus",
+        "Enterovirus/Rhinovirus",
+    ],
+    "COVID-19": [
+        "COVID-19",
+    ],
+    "Coronavirus": [
+        "Coronavirus",
+        "Coronavirus*",
+    ],
+    "Parainfluenza": [
+        "Parainfluenza",
+        "Parainfluenza type 1",
+        "Parainfluenza Type 1",
+        "Parainfluenza type 2",
+        "Parainfluenza type 3",
+        "Parainfluenza type 4",
+        "Parainfluenza PIV III",
+        "Parainfluenza virus",
+        "Parainfluenza UNSPECIFIED",
+    ],
+    "Norovirus": ["Norovirus", "Norovirus-like"],
+}
+reverse_mapping = {
+    agent: group for group, agents in group_mapping.items() for agent in agents
+}
+
+# Remove rows with invalid data (null values)
+rows_before = df.shape[0]
+
+# Filter invalid or uninformative rows
+df = df.dropna()
+df = df[df["Main Causative Agent"] != "Unable to identify"]
+df = df[~df["outbreak_setting"].isin(["Shelter", "Transitional Care"])]
+
+def group_causative_agent(agent):
+    mapping = reverse_mapping.get(agent, "Other")
+    # if mapping == "Other":
+    #     print(agent)
+    return mapping
+
+df["causative_agent"] = df["Main Causative Agent"].apply(group_causative_agent)
+
+df["duration"] = df["duration"].apply(int)
+
+# Filter uninformative rows
+df = df[df["causative_agent"] != "Other"]
+
+# Count rows after removing invalid data
+rows_after = df.shape[0]
+rows_removed = rows_before - rows_after
+
+# Map month number to text
+month_mapping = {
+    1: "Jan",
+    2: "Feb",
+    3: "Mar",
+    4: "Apr",
+    5: "May",
+    6: "Jun",
+    7: "Jul",
+    8: "Aug",
+    9: "Sep",
+    10: "Oct",
+    11: "Nov",
+    12: "Dec",
+}
+df["month"] = df["month"].map(month_mapping)
+
+df = df[
+    [
+        "outbreak_setting",
+        "causative_agent",
+        "month",
+        "duration",
+    ]
+]
+
+print(f"Number of rows with N/A data removed: {rows_removed}")  # 31
+
+# Save the cleaned dataframe as CSV
+os.makedirs(output_dir, exist_ok=True)
+cleaned_filename = os.path.join(output_dir, "analysis_data.csv")
+df.to_csv(cleaned_filename, index=False)
+print(f"Cleaned data saved to {cleaned_filename}")
+
+I've changed my data to month from numerical to text 
+ChatGPT said:
+ChatGPT
+Your updated script successfully converts numerical months into textual month names using the month_mapping dictionary. This is a useful change for improving the readability of your dataset. Here's a summary and confirmation of the key modifications you've made:
+
+Key Modifications:
+Mapping Numerical Months to Textual Names:
+
+You introduced a month_mapping dictionary to map numerical month values (1–12) to corresponding month names (e.g., "Jan", "Feb").
+Used map() to apply this mapping:
+python
+Copy code
+df["month"] = df["month"].map(month_mapping)
+Updated DataFrame Columns:
+
+The column month in the final dataset now contains month names instead of numbers.
+Maintained Cleaned Structure:
+
+The cleaned dataset retains key columns:
+outbreak_setting
+causative_agent
+month (now textual)
+duration
+Saved Output:
+
+The cleaned data is saved as analysis_data.csv in the specified output directory.
+Sample Output Example
+Here’s an example of how the transformed df might look:
+
+outbreak_setting	causative_agent	month	duration
+Long-Term Care	Influenza	Jan	10
+Retirement Home	COVID-19	Feb	15
+Hospital	Norovirus	Mar	7
+Confirmation of Changes
+Readability: Month names make the dataset more intuitive for analysis and reporting.
+Data Integrity: No critical information is lost; only numerical values are replaced with corresponding text.
+Next Steps (Optional)
+If you'd like further refinements:
+
+Add error handling to ensure all months are mapped correctly (e.g., df["month"].fillna("Unknown") for unmapped values).
+Perform exploratory analysis or visualizations (e.g., matplotlib or seaborn).
+Let me know if you need help with further analysis or processing!
+
+
+
+
+
+
+You said:
+---
+title: "Analyzing the Factors Influencing Outbreak Duration in Toronto Healthcare Institutions"
+subtitle: "My subtitle if needed"
+author: 
+  - Kevin Cai
+thanks: "Code and data are available at: [https://github.com/kevicai/toronto-healthcare-outbreak-prediction](https://github.com/kevicai/toronto-healthcare-outbreak-prediction)."
+date: today
+date-format: long
+abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+format: pdf
+number-sections: true
+bibliography: references.bib
+---
+
+{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+library("rstanarm")
+library("caret")
+library("loo")
+
+
+
+# Introduction {#sec-intro}
+
+Overview paragraph
+
+Estimand paragraph
+
+Results paragraph
+
+Why it matters paragraph
+
+Telegraphing paragraph: The remainder of this paper is structured as follows. @sec-data....
+
+
+# Data {#sec-data}
+
+## Overview
+
+This report uses the Outbreaks in Toronto Healthcare Institutions dataset, contains data from January 2016 to November 2024. The dataset is provided by Toronto Public Health, through City of Toronto Open Data Portal [@datasource]. The dataset tracks reported outbreaks of gastroenteric and respiratory illnesses in Toronto healthcare institutions and contains detailed information on outbreak settings, causative agents, and outbreak durations. Following the principles from Telling Stories with Data [@textbook], we examine how the characteristics of outbreaks, such as the type of healthcare institution, the causative agent, and the month the outbreak began, influence their durations. A sample of the cleaned dataset is shown in @tbl-cleaned. 
+
+{r, message = FALSE, echo = FALSE}
+#| label: tbl-cleaned
+#| tbl-cap: "Sample of Cleaned Outbreaks in Toronto Healthcare Institution Data"
+data <- read.csv(here::here("data/02-analysis_data/analysis_data.csv"))
+head(data, 5) |>
+    kable(col.names = c("Outbreak Setting", "Causative Agent", "Month", "Outbreak Duration"))
+
+
+There is 5387 observations in the orginal dataset and 1119 observations were removed that contained missing, invalid, or irrelivant data of the variables we're interested in. The data was first downloaded using Python [@citePython] and cleaned with the pandas package [@citePandas]. The cleaning process involved converting dates to a standardized datetime format, creating a "duration" variable representing the length of each outbreak, and extracting the month of the outbreak's start. Irrelevant columns were removed, and variables were renamed for clarity. Causative agents were grouped into broader categories, and rows with missing or invalid data were removed, including those with unidentifiable causative agents or certain outbreak settings. The final dataset was saved for further analysis.
+
+R [@citeR] is used for the generation of figures, graphs, and tables throughout this paper. Specifically, the rstanarm package [@rstanarm] was employed to fit the model. For data manipulation, the dplyr package [@dplyr] was utilized to clean and transform the data efficiently. The caret package [@caret] was used for model training, while modelsummary [@modelsummary] was used to produce concise tables summarizing the model output. The loo package [@loo] was used to perform leave-one-out cross-validation, which helped assess the model’s predictive performance. Finally, the package ggplot2 is used to generate graphics and figures for this analysis. The starter code and the data analysis techniques used are from Telling Stories with Data (@citeRohan). 
+
+## Measurement
+	
+The data was primarily collected through mandatory reporting by healthcare institutions to Toronto Public Health under the Ontario Health Protection and Promotion Act (HPPA). Reports of suspected or confirmed outbreaks include both gastroenteric and respiratory illnesses. These reports are based on active monitoring by institutional staff, who observe and document signs and symptoms such as nausea, vomiting, fever, cough, or sore throat.
+
+Some details, such as the causative agent group, may initially be unconfirmed and later identified through laboratory tests or clinical evaluations. However, these identifications are not always definitive. For instance, "Coronavirus*" in the dataset refers to seasonal coronaviruses, which are commonly implicated in respiratory outbreaks, and does not include COVID-19.
+
+The unit of measurement for outbreak duration is in days. Other data fields, such as outbreak setting and causative agent group, are categorical features without numerical units. The dataset is updated weekly, ensuring it reflects the most recent outbreak data available.
+
+## Outcome variable
+
+### Duration
+The Duration variable is numerical and indicates the total number of days each outbreak lasted. This reflects the severity and magnitude of the outbreak. It is constructed from the dataset by calculating the difference between the outbreak start and end dates.
+
+{r, message = FALSE, echo = FALSE}
+#| label: fig-duration
+#| fig-cap: "Distribution of Outbreak Duration"
+ggplot(data, aes(x = duration)) +
+  geom_histogram(fill = "steelblue", binwidth = 5, alpha = 0.8) +
+  labs(
+    x = "Duration (Days)",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 8),
+    axis.title = element_text(size = 10)
+  )
+
+
+{r, message = FALSE, echo = FALSE}
+#| label: tbl-duration-mean-var
+#| tbl-cap: "Summary of Outbreak Duration: Mean and Variance"
+mean_duration <- mean(data$duration)
+var_duration <- var(data$duration)
+
+tibble(
+  Statistic = c("Mean Duration", "Variance"),
+  Value = c(mean_duration, var_duration)
+) |> 
+  kable(col.names = c("Statistic", "Value"))
+
+
+Longer outbreak durations may indicate challenges in containment, possibly influenced by the Outbreak Setting and Causative Agent.
+
+## Predictor variables
+
+### Outbreak Setting
+The Outbreak Setting variable is categorical and identifies the type of healthcare institution where the outbreak occurred, such as hospitals, long-term care homes (LTCH), or retirement homes. It provides insights into the environments most affected by outbreaks.
+
+@fig-setting-count illustrates the count of outbreaks across different settings in the dataset. 
+
+{r, message = FALSE, echo = FALSE}
+#| label: fig-setting-count
+#| fig-cap: "Outbreak occurrence in healthcare settings"
+outbreak_setting_count <- data |>
+  count(outbreak_setting, name = "count") |>
+  mutate(percentage = (count / sum(count)) * 100) |>
+  arrange(desc(count))
+
+# Bar graph for Outbreak Setting
+ggplot(outbreak_setting_count, aes(x = reorder(outbreak_setting, -count), y = count)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  geom_text(aes(label = sprintf("%.1f%%", percentage)), hjust = -0.1, size = 3) +
+  scale_y_continuous(expand = expansion(mult = c(0.02, 0.2))) + # Add right padding
+  coord_flip() + 
+  labs(
+    x = "Outbreak Setting",
+    y = "Count"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 8),
+    axis.title = element_text(size = 10)
+  )
+
+
+LTCH (Long-Term Care Homes) accounts for a significant portion of outbreaks, likely due to the vulnerability of their populations. Comparing the frequency of outbreaks across settings can reveal risk patterns.
+
+### Causative Agent
+The Causative Agent variable is categorical and reflects the infectious agents responsible for outbreaks. While the original dataset contains 55 agents, they are grouped into seven broader categories to simplify the analysis and enhance interpretability.
+
+@fig-agent-count illustrates the count and percentage distribution of causative agents in the dataset.
+
+{r, message = FALSE, echo = FALSE}
+#| label: fig-agent-count
+#| fig-cap: "Outbreak causative agent count and percentage"
+outbreak_agent_count <- data |>
+  count(causative_agent, name = "count") |>
+  mutate(percentage = (count / sum(count)) * 100) |>
+  arrange(desc(count))
+
+# Bar graph for Causative Agents
+ggplot(outbreak_agent_count, aes(x = reorder(causative_agent, -count), y = count)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  geom_text(aes(label = sprintf("%.1f%%", percentage)), hjust = -0.1, size = 3) +
+  scale_y_continuous(expand = expansion(mult = c(0.02, 0.2))) + # Add right padding
+  coord_flip() +
+  labs(
+    x = "Causative Agent",
+    y = "Count"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 8),
+    axis.title = element_text(size = 10),
+    plot.margin = margin(1, 1.2, 1, 1, "cm")
+  )
+
+
+### Month Outbreak Began
+The Month variable is categorical and records the calendar month when each outbreak started as a number. It reflects seasonal trends and potential patterns in infection rates. This variable is extracted from the date where each outbreak began from the original dataset. 
+
+@fig-month shows the the occurance of outbreaks in each month, with winter months having siginifiantly more outbreaks compared to other months. This suggest that seasons have effects on outbreak occurances.
+
+@fig-month-duration the boxplot visualizes the distribution of outbreak durations for each month. The duration of months January to November outbreaks appears similar, while December has a noticeable increase in duration compared to other months.
+
+{r, message = FALSE, echo = FALSE}
+#| label: fig-month
+#| fig-cap: "Seasonal trends in outbreak occurrence and percentage"
+outbreak_month_count <- data |>
+  count(month, name = "count") |>
+  arrange(desc(month))
+
+ggplot(outbreak_month_count, aes(x = month, y = count)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(
+    x = "Month",
+    y = "Count"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 8),
+    axis.title = element_text(size = 10)
+  )
+
+
+{r, message = FALSE, echo = FALSE}
+#| label: fig-month-duration
+#| fig-cap: "Duration of outbreaks across different months"
+# Scatter plot for month vs. duration
+ggplot(data, aes(x = as.factor(month), y = duration)) +
+  geom_boxplot(fill = "steelblue", alpha = 0.7) +
+  labs(
+    x = "Month",
+    y = "Duration (days)",
+    title = "Duration of Outbreaks Across Months"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 8),
+    axis.title = element_text(size = 10),
+    plot.title = element_text(size = 12, face = "bold")
+  )
+
+
+# Model
+
+## Model Overview
+
+To better understand the factors influencing the duration of outbreaks in Toronto healthcare facilities, a statistical model was developed using the negative binomial regression framework. This model was chosen because the outcome variable of interest, outbreak duration, is a count variable with evidence of overdispersion—where the variance exceeds the mean [@textbook]. Additionally, this model was Bayesian, meaning the parameters were treated as random variables with prior probability distributions reflecting initial beliefs about their values before considering the data.
+
+## Model Setup
+
+The setup for the Bayesian negative binomial regression model used in this analysis is as follows:
+
+\begin{align} 
+y_i | \lambda_i &\sim \text{Negative Binomial}(\lambda_i, \phi) \\
+\log(\lambda_i) &= \beta_0 + \beta_1 \times \text{outbreak\_setting}_i + \beta_2 \times \text{causative\_agent}_i + \beta_3 \times \text{month}_i \\
+\beta_0 &\sim \text{Normal}(0, 2.5) \\
+\beta_1 &\sim \text{Normal}(0, 2.5) \\
+\beta_2 &\sim \text{Normal}(0, 2.5) \\
+\beta_3 &\sim \text{Normal}(0, 2.5) \\
+\phi &\sim \text{Exponential}(1)
+\end{align}
+
+In the above model:
+
+- $\lambda_i$ is the expected duration of outbreak $i$, modeled through a log link.
+- $\beta_0$ is the intercept term.
+- $\beta_1$ is the coefficient for the **outbreak setting**.
+- $\beta_2$ is the coefficient for the **causative agent**.
+- $\beta_3$ is the coefficient for the **month** when the outbreak started.
+- $\phi$ is the **dispersion parameter** that controls the degree of overdispersion in the negative binomial distribution.
+
+All coefficients ($\beta_0, \beta_1, \beta_2, \beta_3$) are assigned the prior of Normal(0, 2.5), which is the rstanarm package's default priors. The choice of  the prior is sufficient for the model in this analysis and is a common non-informative prior that allows for reasonable variability [@textbook]. The dispersion parameter $\phi$ is assigned an **Exponential(1)** prior, which reflects the observation that the variance is greater than the mean. Since we have categorical predictor variables, these priors allow the coefficients to adjust based on the data. 
+
+
+## Model Selection
+
+{r, message = FALSE, echo = FALSE}
+#| label: load-models
+library(rstanarm)
+poisson_model <-
+    readRDS(file = here::here("models/poisson_model.rds"))
+neg_binomial_model <- 
+    readRDS(file = here::here("models/neg_binomial_model.rds"))
+
+
+Both negative binomial model and Poisson model for the dataset was constructed using the rstanarm package [@rstanarm] and R [@citeR]. But the negative binomial model was chosen over the Poisson model for several reasons. First, as shown in @tbl-modelresults, the variance of the outcome variable, duration, is significantly higher than the mean, indicating overdispersion. The Poisson model assumes equal mean and variance, which is not suitable in this case. The negative binomial model relaxes this assumption, allowing for overdispersion and providing a better fit for the data [@textbook].Additionally, the Leave-One-Out Cross Validation (LOO-CV) results in @tbl-loo-comparison show that the negative binomial model has a higher ELPD (Expected Log Pointwise Predictive Density) compared to the Poisson model. The ELPD is a metric that measures the model’s predictive performance, with higher values indicating a better fit to the data  [@textbook]. The fact that the negative binomial model outperforms the Poisson model in this regard suggests that it is more effective at capturing the underlying patterns of the outbreak duration data.
+
+Other regression models like logistic regression were not chosen because logistic regression is designed for modeling binary outcomes. Since our outcome variable, duration, is a continuous count variable representing the number of days an outbreak lasts, logistic regression is not appropriate because it cannot model continuous or count data. Linear regression was also not chosen because Poission and negative binomial distributions are more suitable for modeling count data like outbreak duration in days, where as linear regression is more suitible for continuous data.
+
+## Model Diagnostics and Validation
+
+We conducted several key validation checks to assess its predictive performance and overall adequacy. Aside from using LOO Cross Validation technique, we also calculated the Mean Absolute Error (MAE) for both models as a metric to assess the predictive performance of the Negative Binomial model over the Poisson model. To ensure the model doesn't over fit the training data, we first split the data into training and test sets. The data was randomly divided using the caret package [@caret], with 80% used for model training and the remaining 20% reserved for testing. We used both models to predict the outcome variable (outbreak duration) on the test set and compared the predicted values to the actual values from the test set to compute the MAE for each model.
+
+{r, message = FALSE, echo = FALSE}
+#| label: tbl-mae-comparison
+#| tbl-cap: "Comparison of Mean Absolute Error (MAE) for Poisson and Negative Binomial Models"
+test_data <- read.csv(here::here("data/02-analysis_data/test_data.csv"))
+
+# Convert variables to factors
+test_data <- test_data |>
+  mutate(
+    outbreak_setting = factor(outbreak_setting),
+    causative_agent = factor(causative_agent),
+    month = factor(month)
+  )
+
+poisson_pred <- predict(poisson_model, newdata = test_data, type = "response")
+neg_binomial_pred <- predict(neg_binomial_model, newdata = test_data, type = "response")
+ 
+# Compute MAEs and present in a table
+mae_poisson <- round(mean(abs(test_data$duration - poisson_pred)), 2)
+mae_neg_binomial <- round(mean(abs(test_data$duration - neg_binomial_pred)), 2)
+
+mae_table <- tibble(
+  Model = c("Poisson Model", "Negative Binomial Model"),
+  MAE = c(mae_poisson, mae_neg_binomial)
+)
+
+mae_table |>
+  kable(col.names = c("Model", "Mean Absolute Error (MAE)"))
+
+
+From @tbl-mae-comparison, the MAE for the Poisson model is 6.53, while the MAE for the Negative Binomial model is 6.52. The difference between the MAEs is minimal, suggesting that both models perform similarly in terms of prediction accuracy. However, the Negative Binomial model may still be preferred as it accounts for overdispersion, which is more appropriate for count data. The MAE of 6.52 means that, on average, the predicted outbreak duration from the Negative Binomial model deviates from the actual duration by approximately 6.52 days. In other words, for any given outbreak in the test data, the model's prediction of the outbreak's duration is off by around 6.5 days, either overestimating or underestimating the actual duration.
+
+# Results
+
+Our results are summarized in @tbl-model-summary using the modelsummary package [@modelsummary], where the model is tidied with the broom.mixed package [@broom] and the output table is scaled down with the kableExtra package [@kableExtra]. The intercept represents that the baseline outbreak duration is 2.257 days when all predictors are at their reference levels.
+
+Outbreak Setting:
+Hospital-Chronic Care (0.046): Slightly longer outbreaks (+0.046 days) compared to the reference group which is month 1.
+Hospital-Psychiatric (-0.082): Slightly shorter outbreaks (-0.082 days).
+LTCH (0.465) & Retirement Home (0.342): Outbreaks in these settings last significantly longer than in the reference group, with increases of 0.465 and 0.342 days, respectively.
+
+Causative Agent:
+COVID-19 (0.412): COVID-19 outbreaks last 0.412 days longer compared to the reference agent (likely Influenza).
+Influenza (-0.651): Influenza outbreaks are shorter by 0.651 days.
+Month of the Year:
+
+Month2 (-0.109) & Month5 (-0.157): February and May outbreaks tend to be shorter than those in January.
+Month12 (0.029): December outbreaks are slightly longer compared to January.
+Model Fit:
+
+Num. Obs. (3416): Based on 3416 observations.
+Algorithm (sampling): The model used Bayesian sampling for estimation.
+
+{r, message = FALSE, echo = FALSE}
+#| label: fig-90-interval
+#| fig-cap: "90 percent credibility interval"
+library(broom.mixed)
+library(modelsummary)
+library(kableExtra)
+
+tidy_neg_binomial <- tidy(neg_binomial_model, conf.int = TRUE, conf.level = 0.9)
+
+ggplot(tidy_neg_binomial, aes(x = term, y = estimate, ymin = conf.low, ymax = conf.high)) +
+  geom_pointrange() +
+  coord_flip() +  
+  labs(
+    title = "90% Credibility Intervals for Coefficients",
+    x = "Predictor",
+    y = "Coefficient Estimate"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 12)
+  )
+
+
+# Discussion
+
+## First discussion point {#sec-first-point}
+
+If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+
+## Second discussion point
+
+Please don't use these as sub-heading labels - change them to be what your point actually is.
+
+## Third discussion point
+
+## Weaknesses and next steps
+
+Weaknesses and next steps should also be included.
+
+\newpage
+
+\appendix
+
+# Appendix {-}
+
+
+# Additional data details
+
+# Model details {#sec-model-details}
+
+## Outcome Variable Variance and Mean 
+
+## Posterior predictive check
+
+In @fig-ppchecks, using code adapted from @textbook, posterior prediction checks were performed for both the Poisson model and the negative binomial model. The figure show how well the model is able to predict the observed outcomes.
+
+{r, message = FALSE, echo = FALSE}
+#| label: fig-ppchecks
+#| layout-ncol: 2
+#| fig-cap: "Comparing posterior prediction checks for the Poisson model and the negative binomial model"
+#| fig-subcap: ["Poisson model posterior prediction check", "Negative binomial model posterior prediction check"]
+pp_check(poisson_model) +
+  theme_classic() +
+  theme(legend.position = "bottom")
+
+pp_check(neg_binomial_model) +
+  theme_classic() +
+  theme(legend.position = "bottom")
+
+
+## Leave-One-Out (LOO) Cross Validation (CV) Comparison
+
+In @fig-loo-comparison, we compare LOO performance of the Poission model against the negative binomial model based on the expected log pointwise predictive density (ELPD) and find that the negative binomial model has a higher ELPD value.
+
+{r, message = FALSE, echo = FALSE}
+#| label: tbl-loo-comparison
+#| tbl-cap: "Comparing LOO for Poisson and negative binomial models"
+poisson_loo <- loo(poisson_model, cores = 2)
+neg_binomial_loo <- loo(neg_binomial_model, cores = 2)
+
+loo_comparison <- loo_compare(poisson_loo, neg_binomial_loo)
+loo_comparison
+
+
+## Model summary
+
+@tbl-model-summary presents a summary of the model used in the analysis, which includes the intercept and the coefficients for predictor variables, and the model fitting process. 
+
+{r, message = FALSE, echo = FALSE}
+#| label: tbl-model-summary
+#| tbl-cap: "Explanatory model of outbreak duration for Model (1), the negative binomial model"
+tidied_neg = tidy(neg_binomial_model)
+glance_neg = glance(neg_binomial_model)
+
+msummary_out = list(tidy = tidied_neg,
+                    glance = glance_neg) 
+
+class(msummary_out) = 'modelsummary_list'
+
+modelsummary(
+    msummary_out, output = "kableExtra"
+) |>
+  kable_styling(font_size = 8)
+
+
+## Diagnostics
+
+<!-- 
+{r}
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+#| label: fig-stanareyouokay
+#| fig-cap: "Checking the convergence of the MCMC algorithm"
+#| fig-subcap: ["Trace plot", "Rhat plot"]
+#| layout-ncol: 2
+
+plot(model, "trace")
+
+plot(model, "rhat")
+ -->
+
+
+
+\newpage
+
+
+# References
+
+
+
+change all mention of months as number to string!! just tell me where to change for each location
+
+1/2
+
+ChatGPT said:
+ChatGPT
+Here’s a breakdown of where to change months represented as numbers to their corresponding string (month names) in your document:
+
+Sections to Change
+1. Data Cleaning
+Script Section:
+r
+Copy code
+df["month"] = df["month"].map(month_mapping)
+Ensure this mapping is applied before saving the cleaned dataset, so all references to months in subsequent sections use the textual format.
+2. Measurement Section
+Current Text:
+
+The Month variable is categorical and records the calendar month when each outbreak started as a number.
+
+Change To:
+
+The Month variable is categorical and records the calendar month when each outbreak started as a name (e.g., January, February).
+
+3. Figures and Tables
+@fig-month: Ensure the x-axis for month in your bar plot uses month names:
+
+r
+Copy code
+ggplot(outbreak_month_count, aes(x = month, y = count)) +
+Here, the month column should already contain text values.
+
+@fig-month-duration: Update the x-axis labels in the boxplot:
+
+r
+Copy code
+ggplot(data, aes(x = as.factor(month), y = duration)) +
+Ensure the month column contains month names before plotting.
+
+4. Textual References to Months
+@fig-setting-count: No changes needed if months are not mentioned explicitly.
+
+@fig-month (Narrative): Update:
+
+"... with winter months having significantly more outbreaks compared to other months." Ensure textual month names are mentioned if specific months are discussed (e.g., "December" instead of "12").
+
+@fig-month-duration: Update narrative to include textual month names:
+
+"... December has a noticeable increase in duration compared to other months."
+
+5. Appendices and Model Details
+Outcome Variable Variance and Mean Section: Check any statistical summaries or plots referencing months and ensure textual names are used.
+
+Posterior Predictive Check Section: Ensure no implicit numerical month references exist.
+
+Key Changes in Plots
+For any ggplot visualizations, confirm that the month column contains textual names in the data before plotting:
+
+Convert months to text during data preparation:
+r
+Copy code
+data$month <- factor(data$month, levels = c("Jan", "Feb", ..., "Dec"))
+This will ensure all numerical references to months are replaced with their corresponding names in plots and tables.
+
+General Note
+If month is used numerically in any computation, ensure it's converted back to text for reporting. Let me know if you need further assistance with the specific code for any of these steps!
+
+
+
+
+
+
+You said:
+Error in model.frame.default():
+! factor month has new levels Apr, Aug, Dec, Feb, Jan, Jul, Jun, Mar, May, Nov, Oct, Sep
+Backtrace:
+  1. global .main()
+  2. execute(...)
+  3. rmarkdown::render(...)
+  4. knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet)
+  5. knitr:::process_file(text, output)
+     ...
+ 16. base::withRestarts(...)
+ 17. base (local) withRestartList(expr, restarts)
+ 18. base (local) withOneRestart(withRestartList(expr, restarts[-nr]), restarts[[nr]])
+ 19. base (local) docall(restart$handler, restartArgs)
+ 21. evaluate (local) fun(base::quote(<smplErrr>))
+
+
+
+Quitting from lines 267-293 [tbl-mae-comparison] (paper.qmd)
+Execution halted
+#| label: tbl-mae-comparison
+#| tbl-cap: "Comparison of Mean Absolute Error (MAE) for Poisson and Negative Binomial Models"
+test_data <- read.csv(here::here("data/02-analysis_data/test_data.csv"))
+
+# Convert variables to factors
+test_data <- test_data |>
+  mutate(
+    outbreak_setting = factor(outbreak_setting),
+    causative_agent = factor(causative_agent),
+    month = factor(month)
+  )
+
+poisson_pred <- predict(poisson_model, newdata = test_data, type = "response")
+neg_binomial_pred <- predict(neg_binomial_model, newdata = test_data, type = "response")
+ 
+# Compute MAEs and present in a table
+mae_poisson <- round(mean(abs(test_data$duration - poisson_pred)), 2)
+mae_neg_binomial <- round(mean(abs(test_data$duration - neg_binomial_pred)), 2)
+
+mae_table <- tibble(
+  Model = c("Poisson Model", "Negative Binomial Model"),
+  MAE = c(mae_poisson, mae_neg_binomial)
+)
+
+mae_table |>
+  kable(col.names = c("Model", "Mean Absolute Error (MAE)")) 
+ChatGPT said:
 ChatGPT
 
-Generated by DALL·E
-Here is a fun and engaging background image featuring the text "STA302". The design incorporates colorful and dynamic elements suitable for the theme.
 
-User
-It doesn't say "STA302"
+
+
+
+You said:
+- The data collection was conducted by Toronto Public Health staff and healthcare workers at the outbreak institutes, but their pay are unknown.
+
+fix grammar
+ChatGPT said:
 ChatGPT
-
-Generated by DALL·E
-Here is the revised image with the text "STA302" prominently displayed.
-
-User
-No. It doesn't say "STA302"
-ChatGPT
-
-Generated by DALL·E
-Here's the image with the text "STA302" as requested.
-
-User
-Again. It doesn't say "STA302"
-
-ChatGPT
-
-Generated by DALL·E
-Here is the image with the text "STA302" prominently displayed.
+The data collection was conducted by Toronto Public Health staff and healthcare workers at the outbreak institutions, but their compensation is unknown.

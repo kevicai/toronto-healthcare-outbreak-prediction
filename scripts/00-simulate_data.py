@@ -35,6 +35,7 @@ causative_agent_groups = [
     "Norovirus",
     "Parainfluenza",
     "Respiratory syncytial virus",
+    "Coronavirus",
 ]
 
 #### Simulate data ####

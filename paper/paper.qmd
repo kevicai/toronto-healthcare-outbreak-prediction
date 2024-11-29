@@ -1,12 +1,11 @@
 ---
 title: "Analyzing the Factors Influencing Outbreak Duration in Toronto Healthcare Institutions"
-subtitle: "My subtitle if needed"
 author: 
   - Kevin Cai
 thanks: "Code and data are available at: [https://github.com/kevicai/toronto-healthcare-outbreak-prediction](https://github.com/kevicai/toronto-healthcare-outbreak-prediction)."
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This study investigates the factors influencing the duration of infectious disease outbreaks in healthcare institutions in Toronto, focusing on the role of outbreak setting, causative agent, and seasonal variations. Using a Bayesian negative binomial regression model, the analysis identifies significant drivers of outbreak duration and highlights the importance of targeted preparedness in settings like Long-Term Care Homes (LTCHs) and Retirement Homes. The findings suggest that COVID-19 has a substantial impact on outbreak duration compared to other respiratory viruses. This research underscores the need for robust healthcare infrastructure and adaptive strategies to manage future healthcare outbreaks effectively."
 format: pdf
 number-sections: true
 execute: 
@@ -33,11 +32,11 @@ library(kableExtra)
 
 # Introduction {#sec-intro}
 
-Outbreaks of infectious diseases in healthcare institutions are a significant challenge, particularly in hospitals, long-term care homes, and retirement homes, where vulnerable populations are most at risk. Understanding the factors that influence the duration of these outbreaks is important for improving preparedness, response times, and resource allocation. Previous studies have looked at factors affecting outbreak durations, but more research is needed, especially in Toronto’s healthcare system. This paper analyzes the key factors that influence the duration of outbreaks in Toronto healthcare institutions, focusing on outbreak setting, causative agents, and the timing of outbreaks.
+Infectious disease outbreaks in healthcare settings present significant challenges, particularly in hospitals, long-term care homes, and retirement homes, where vulnerable populations are at highest risk [@torontoActiveOutbreaks]. These environments house individuals who are more susceptible to infections, including the elderly, individuals with compromised immune systems, and those with underlying health conditions. In Toronto, public health authorities are required to respond to and manage outbreaks of gastroenteric and respiratory illnesses in these institutions [@torontoActiveOutbreaks]. Efficient management of such outbreaks is essential to prevent widespread illness and ensure the safety of patients, staff, and visitors. Understanding the factors that influence the duration of these outbreaks is important for enhancing preparedness, minimizing response times, and optimizing resource allocation.
 
-This study uses a Bayesian negative binomial regression model to predict outbreak durations in Toronto's healthcare facilities. The model includes factors like the type of healthcare institution (outbreak setting), the causative agent, and the month the outbreak occurred. This research aims to identify which factors contribute most to variation in outbreak durations. It provides actionable information for public health officials and healthcare managers to improve their response strategies.
+The factors influencing outbreak duration can vary significantly depending on the healthcare setting, the causative agent of the illness, and the timing of the outbreak. In nursing homes, for example, the close living conditions, shared spaces, and frequent interactions between residents, staff, and visitors contribute to the spread of infections. In hospitals, the high turnover of patients and healthcare workers, coupled with the need for intensive medical care, can also worsen the problem. Additionally, the characteristics of specific pathogens can influence transmission dynamics and outbreak duration. For instance, the concentration of SARS-CoV-2 in patient secretions peaks approximately 10 days after symptom onset, influencing transmission patterns and the length of outbreaks in healthcare facilities [@sarsOnHealthcare]. Understanding why some outbreaks persist longer than others requires identifying the drivers of these durations. While previous studies have examined factors affecting outbreak durations, more research is needed, especially within the context of Toronto's healthcare system. Toronto, with its large and diverse population, faces unique challenges in managing healthcare-associated outbreaks. This study aims to estimate the factors influencing the duration of infectious disease outbreaks in Toronto healthcare facilities, by examining various factors such as the type of healthcare setting, the causative agent, and the month when the outbreak occurred, 
 
-The results of this analysis help manage outbreaks, optimize patient care, and reduce the strain on healthcare facilities. Identifying high-risk settings or times of year when outbreaks last longer can improve resource allocation and response planning. This study also adds to the literature on healthcare outbreaks, with a focus on Toronto’s healthcare system.
+To better understand the relationships between these factors and outbreak duration, this study employs a Bayesian negative binomial regression model. This statistical model is well-suited to handling count data and predicting the number of days an outbreak lasts. By identifying the drivers of outbreak duration, the study will help inform strategies for improving outbreak preparedness and response. These findings are important for optimizing resource allocation, ensuring that healthcare facilities are well equipped to handle outbreaks, and improving response efforts.
 
 The remainder of this paper is structured as follows: @sec-data covers the dataset used for analysis, @sec-model describes the model setup and methodology, @sec-results presents the results and their interpretation, and @sec-discussion discusses the findings and future research directions.
 
@@ -45,7 +44,7 @@ The remainder of this paper is structured as follows: @sec-data covers the datas
 
 ## Overview
 
-This report uses the Outbreaks in Toronto Healthcare Institutions dataset, contains data from January 2016 to November 2024. The dataset is provided by Toronto Public Health, through City of Toronto Open Data Portal [@datasource]. The dataset tracks reported outbreaks of gastroenteric and respiratory illnesses in Toronto healthcare institutions and contains detailed information on outbreak settings, causative agents, and outbreak durations. Following the principles from Telling Stories with Data [@textbook], we examine how the characteristics of outbreaks, such as the type of healthcare institution, the causative agent, and the month the outbreak began, influence their durations. A sample of the cleaned dataset is shown in @tbl-cleaned. 
+To examine the effects of factors in healthcare facilities in Toronto on outbreak duration, this report uses the Outbreaks in Toronto Healthcare Institutions dataset, which contains data from January 2016 to November 2024. The dataset is provided by Toronto Public Health, through City of Toronto Open Data Portal [@datasource]. Since no other datasets specific to healthcare institutions in Toronto are available, no additional data sources were considered. The dataset tracks reported outbreaks of gastroenteric and respiratory illnesses in Toronto healthcare institutions and contains detailed information on outbreak settings, causative agents, and outbreak durations. Following the principles from Telling Stories with Data [@textbook], we examine how the characteristics of outbreaks, such as the type of healthcare institution, the causative agent, and the month the outbreak began, influence their durations. A sample of the cleaned dataset is shown in @tbl-cleaned. 
 
 ```{r, message = FALSE, echo = FALSE}
 #| label: tbl-cleaned
@@ -105,7 +104,7 @@ Longer outbreak durations may indicate challenges in containment, possibly influ
 
 ## Predictor variables
 
-### Outbreak Setting
+### Outbreak setting
 The Outbreak Setting variable is categorical and identifies the type of healthcare institution where the outbreak occurred, such as hospitals, long-term care homes (LTCH), or retirement homes. It provides insights into the environments most affected by outbreaks.
 
 @fig-setting-count illustrates the count of outbreaks across different settings in the dataset. 
@@ -137,7 +136,7 @@ ggplot(outbreak_setting_count, aes(x = reorder(outbreak_setting, -count), y = co
 
 LTCH (Long-Term Care Homes) accounts for a significant portion of outbreaks, likely due to the vulnerability of their populations. Comparing the frequency of outbreaks across settings can reveal risk patterns.
 
-### Causative Agent
+### Causative agent
 The Causative Agent variable is categorical and reflects the infectious agents responsible for outbreaks. While the original dataset contains 55 agents, they are grouped into seven broader categories to simplify the analysis and enhance interpretability.
 
 @fig-agent-count illustrates the count and percentage distribution of causative agents in the dataset.
@@ -168,7 +167,7 @@ ggplot(outbreak_agent_count, aes(x = reorder(causative_agent, -count), y = count
   )
 ```
 
-### Month Outbreak Began
+### Month outbreak began
 The Month variable is categorical and records the calendar month when each outbreak started as a name (e.g., Jan, Feb). It reflects seasonal trends and potential patterns in infection rates. This variable is extracted from the date where each outbreak began from the original dataset and converted from a number to the corresponding month name. 
 
 @fig-month shows the the occurance of outbreaks in each month, with winter months having siginifiantly more outbreaks compared to other months. This suggest that seasons have effects on outbreak occurances.
@@ -214,13 +213,13 @@ ggplot(data, aes(x = as.factor(month), y = duration)) +
   )
 ```
 
-# Model
+# Model {#sec-model}
 
-## Model Overview
+## Model overview
 
 To better understand the factors influencing the duration of outbreaks in Toronto healthcare facilities, a statistical model was developed using the negative binomial regression framework. This model was chosen because the outcome variable of interest, outbreak duration, is a count variable with evidence of overdispersion—where the variance exceeds the mean [@textbook]. Additionally, this model was Bayesian, meaning the parameters were treated as random variables with prior probability distributions reflecting initial beliefs about their values before considering the data.
 
-## Model Setup
+## Model setup
 
 The setup for the Bayesian negative binomial regression model used in this analysis is as follows:
 
@@ -246,7 +245,7 @@ In the above model:
 All coefficients ($\beta_0, \beta_1, \beta_2, \beta_3$) are assigned the prior of Normal(0, 2.5), which is the `rstanarm` package's default priors. The choice of  the prior is sufficient for the model in this analysis and is a common non-informative prior that allows for reasonable variability [@textbook]. The dispersion parameter $\phi$ is assigned an **Exponential(1)** prior, which reflects the observation that the variance is greater than the mean. Since we have categorical predictor variables, these priors allow the coefficients to adjust based on the data. 
 
 
-## Model Selection
+## Model selection
 
 ```{r, message = FALSE, echo = FALSE}
 #| label: load-models
@@ -260,7 +259,7 @@ Both negative binomial model and Poisson model for the dataset was constructed u
 
 Other regression models like logistic regression were not chosen because logistic regression is designed for modeling binary outcomes. Since our outcome variable, duration, is a continuous count variable representing the number of days an outbreak lasts, logistic regression is not appropriate because it cannot model continuous or count data. Linear regression was also not chosen because Poission and negative binomial distributions are more suitable for modeling count data like outbreak duration in days, where as linear regression is more suitible for continuous data.
 
-## Model Diagnostics and Validation
+## Model diagnostics and validation
 
 We conducted several key validation checks to assess its predictive performance and overall adequacy. Aside from using LOO Cross Validation technique, we also calculated the Mean Absolute Error (MAE) for both models as a metric to assess the predictive performance of the Negative Binomial model over the Poisson model. To ensure the model doesn't over fit the training data, we first split the data into training and test sets. The data was randomly divided using the `caret` package [@caret], with 80% used for model training and the remaining 20% reserved for testing. We used both models to predict the outcome variable (outbreak duration) on the test set and compared the predicted values to the actual values from the test set to compute the MAE for each model.
 
@@ -299,23 +298,9 @@ From @tbl-mae-comparison, the MAE for the Poisson model is 6.53, while the MAE f
 
 In @fig-mcmc, the MCMC algorithm is also used to check for potential issues with the model. The trace plot is constructed using a subset of categorical values from each predictor variable, as there are many values for each category. As seen in the trace plot in @fig-mcmc (a), the lines bounce around but remain horizontal, with a nice overlap between the chains. This indicates that the chains have effectively explored the posterior distribution [@textbook]. The Rhat plot evaluates whether the chains have converged to a common distribution. As seen in the Rhat plot in @fig-mcmc (b), the values are close to 1 and fall below 1.1, suggesting no problems with convergence [@textbook]. Therefore, the model appears to be properly converged, and we do not need to remove or modify predictors, adjust the priors, or re-run the model.
 
-# Results
+# Results {#sec-results}
 
-To determine the reference levels for the categorical data outbreak settings, causative agent, and month, the model automatically selects the first category of each factor based on alphabetical orders of the category names. The intercept represents that the baseline outbreak duration is 2.257 days when all predictors are at their reference levels. @fig-90-interval shows that the 
-
-## Outbreak Setting
-Outbreak setting is referenced based on "Hospital-Acute Care", we compare other categories with it to evaluate how each category influence the model:
-- Hospital-Chronic Care (0.047): Outbreaks in this setting last 0.047 days longer than Hospital-Acute Care.
-- Hospital-Psychiatric (-0.080): Outbreaks in psychiatric hospitals last 0.080 days shorter than Hospital-Acute Care.
-- LTCH (Long-Term Care Homes) (0.465): Outbreaks in LTCHs last 0.465 days longer than in Hospital-Acute Care.
-- Retirement Home (0.343): Outbreaks in retirement homes last 0.343 days longer than in Hospital-Acute Care.
-
-## Causative Agent
-Outbreak setting is referenced based on "Hospital-Acute Care", we compare other categories with it to evaluate how each category influence the model:
-
-
-Num. Obs. (3416): Based on 3416 observations.
-Algorithm (sampling): The model used Bayesian sampling for estimation.
+Our results are summarized in @tbl-model-summary using the modelsummary package [@modelsummary], where the model is tidied with the broom.mixed package [@broom] and the output table is scaled down with the kableExtra package [@kableExtra]. In the summary the model automatically selects the first category of each factor based on alphabetical orders of the category names. The intercept represents that the baseline outbreak duration is 2.257 days when all predictors are at their reference levels. For the outbreak setting, the reference category is "Hospital-Acute Care", all other outbreak settings are compared to "Hospital-Acute Care" to evaluate their influence on outbreak duration. The reference category is "Coronavirus" for the causative agent, the reference category is "April" for the month. By comparing the results, we can observe how each variable influences the duration differently. 
 
 ```{r, message = FALSE, echo = FALSE}
 #| label: "fig-90-interval"
@@ -335,36 +320,38 @@ ggplot(tidy_neg_binomial, aes(x = term, y = estimate, ymin = conf.low, ymax = co
   )
 ```
 
-# Discussion
+Based on the 90% credibility interval plot for the model in @fig-90-interval, we can analyze the influence of each predictor on outbreak duration:
+Intercept: The intercept coefficient estimate lies above 0, indicating that the baseline outbreak duration (when all predictors are at their reference levels) is positively associated with longer outbreak durations. The confidence intervals for most variables are relatively small, with the largest interval reaching around 0.25. A wider interval suggests greater uncertainty and higher variation in the estimate for that predictor. Conversely, narrower intervals indicate more precise estimates of the effect of the predictor on outbreak duration.
 
-## First discussion point {#sec-first-point}
+Based on @fig-90-interval and @tbl-model-summary, we can see that for outbreak settings, the model suggests that outbreaks in Retirement Homes and Long-Term Care Homes (LTCHs) tend to last longer than other settings. This supports the expectation that these facilities, housing more vulnerable demographics, are more prone to prolonged outbreaks. On the other hand, Hospital-Psychiatric outbreaks tend to be shorter, as indicated by the negative coefficient. This supports the variability in duration across different healthcare settings. Regarding the causative agents, Respiratory Syncytial Virus (RSV), Parainfluenza, Norovirus, Enterovirus/Rhinovirus, and COVID-19, all show positive coefficient estimates, with COVID-19 being much larger compared to all other agents. This suggests that outbreaks caused by these agents last longer than those caused by Coronavirus (the reference group). In contrast, Influenza outbreaks are expected to last shorter, as indicated by its negative coefficient, while Metapneumovirus shows a marginal increase in duration, though its coefficient is very close to 0. Finally, the month of the outbreak also plays a role in its duration. The model suggests that outbreaks occurring in August and January are generally shorter compared to April (the reference month), while December outbreaks tend to last longer, which may suggest seasonal variation in outbreak duration. Overall, the 90% credibility intervals for the coefficients highlight the significance of the predictors in influencing outbreak duration, with some factors such as the type of healthcare setting and causative agent having a more substantial effect, while others, like month of occurrence, show moderate influences. 
 
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+# Discussion {#sec-discussion}
 
-## Second discussion point
+## Long-term care homes and retirement homes are most susceptible to outbreaks
+The type of healthcare setting where an outbreak occurs significantly impacts its duration. According to the model’s results, outbreaks in Long-Term Care Homes (LTCHs) and Retirement Homes are more likely to last longer compared to other settings. This finding aligns with the vulnerability of populations in these settings, particularly the elderly, who may have weakened immune systems or multiple preexisting conditions. This observation is consistent with a population-based study of Retirement Homes (RHs) in Ontario, which reported that RHs are highly susceptible to SARS-CoV-2 outbreaks due to home-level and community-level factors. Larger resident capacities, co-location with Long-Term Care facilities, and offering multiple services onsite were identified as significant contributors to outbreak risk. These factors suggest increased staff movement and staff-resident interactions may exacerbate outbreak dynamics in these settings [@retirementCovidRisks]. Furthermore, the study observed that RHs in regions with higher community-level ethnic concentration or increased regional COVID-19 incidence were at elevated risk of outbreaks, although the sensitivity to these factors diminished in Wave 2 due to improved preventative measures, such as mandatory surveillance testing and stricter infection control practices [@retirementCovidRisks]. 
 
-Please don't use these as sub-heading labels - change them to be what your point actually is.
+The facilities of Long-Term Care Homes and Retirement Homes often lack the resources and infrastructure of hospital settings, which may contribute to longer outbreak durations in these environments. Previous research highlights staffing shortages in Long-Term Care Homes further worsen these challenges. The Long-Term Care workforce, has faced retention and recruitment issues for years. The COVID-19 pandemic intensified these problems, leading to burnout and workforce attrition despite wage increases and hiring incentives [@longTermCareStaffing]. Additionally, limited training and career advancement opportunities for direct care aides further strain care quality. These staffing issues, combined with high operational costs, hinder the ability of LTCH facilities to manage outbreaks effectively [@longTermCareStaffing]. Addressing these systemic challenges is critical to improving outbreak management in LTCH and Retirement Homes. 
 
-## Third discussion point
+## The Impact of COVID-19 vs regular Coronavirus
 
-## Weaknesses and next steps
+The analysis shows that COVID-19 had a significant impact on the duration of outbreaks in healthcare settings, especially when compared to other respiratory pathogens like the common coronavirus. COVID-19 outbreaks were found to last much longer than those caused by regular coronaviruses, a finding consistent with the global experience during the pandemic. Several factors contributed to this prolonged duration, including the high transmissibility of the virus, its asymptomatic spread, and the challenges of managing outbreaks in healthcare settings housing vulnerable populations [@retirementCovidRisks]. Additionally, the virus’s evolving nature, with new variants emerging over time, further complicated efforts to contain it, requiring healthcare facilities to frequently adjust infection control measures.
 
-Weaknesses and next steps should also be included.
+While the model suggests that regular coronaviruses did not have a similar effect on outbreak duration, as seen in @tbl-model-summary, the coefficient is close to that of other causative agents. This indicates that once the COVID-19 pandemic is under control, coronaviruses may not pose the same level of challenge to healthcare systems. The findings highlight the importance of ongoing preparedness for future global health crises, where the emergence of new infectious diseases or highly transmissible variants could once again stretch healthcare resources. Continued investment in healthcare infrastructure, surveillance, and rapid response capabilities will be essential to minimize the potential impact of future pandemics on healthcare facilities, ensuring they are well-equipped to manage outbreaks of varying durations.
 
-\newpage
+## The Effect of Winter on Outbreak Duration
+The model suggests that outbreaks occurring in winter, particularly in December, tend to last longer compared to other months. This seasonal variation is likely due to higher rates of respiratory illnesses such as influenza and RSV during colder months, combined with holiday-related gatherings and staff shortages. The strain on healthcare facilities, particularly those housing vulnerable populations, can further extend outbreak durations. These findings highlight the need for targeted preparedness during winter, including increased staffing, early vaccinations, and robust infection control measures to minimize the impact of seasonal outbreaks.
 
-\appendix
+## Weaknesses and Next Steps
+
+One limitation of this analysis is the reliance on available outbreak data, which may not fully capture all outbreaks in healthcare settings. For instance, some incidents might have gone unreported, or data may have been misclassified, which could introduce bias or reduce the generalizability of the findings. Additionally, the model does not account for interactions between different factors, such as the combined effects of outbreak setting and causative agent, which could provide more nuanced insights. The assumptions made in the negative binomial regression model also rely on the availability of complete and accurate data, which may not always be the case, particularly with retrospective datasets. Furthermore, although the Mean Absolute Error (MAE) of 6.52 days is relatively small, it still represents a notable deviation from the actual outbreak duration, suggesting that further investigation and model refinement are needed to improve accuracy.
+
+Future research could enhance this study by incorporating more detailed data, including healthcare interventions and patient information. Exploring the interaction between predictors like outbreak setting, causative agent, and seasonal trends could provide deeper insights into outbreak dynamics. The model also does not incorporate the potential influence of COVID-19 vaccinations on outbreak duration, an important factor that could have significantly altered the course of outbreaks, particularly in healthcare settings. Further research could explore the role of vaccination coverage and its interaction with other variables to improve predictive accuracy.
 
 # Appendix {-}
 
+## Model details
 
-# Additional data details
-
-# Model details {#sec-model-details}
-
-## Outcome Variable Variance and Mean 
-
-## Posterior predictive check
+### Posterior predictive check
 
 In @fig-ppchecks, using code adapted from @textbook, posterior prediction checks were performed for both the Poisson model and the negative binomial model. The figure show how well the model is able to predict the observed outcomes.
 
@@ -382,7 +369,7 @@ pp_check(neg_binomial_model) +
   theme(legend.position = "bottom")
 ```
 
-## Leave-One-Out (LOO) Cross Validation (CV) Comparison
+### Leave-One-Out (LOO) Cross Validation (CV) Comparison
 
 In @tbl-loo-comparison, we compare LOO performance of the Poission model against the negative binomial model based on the expected log pointwise predictive density (ELPD) and find that the negative binomial model has a higher ELPD value.
 
@@ -396,7 +383,7 @@ loo_comparison <- loo_compare(poisson_loo, neg_binomial_loo)
 loo_comparison
 ```
 
-## Model summary
+### Model summary
 
 @tbl-model-summary presents a summary of the model used in the analysis, which includes the intercept and the coefficients for predictor variables, and the model fitting process. 
 
@@ -417,7 +404,7 @@ modelsummary(
   kable_styling(font_size = 8)
 ```
 
-## Diagnostics
+### Diagnostics
 
 @fig-mcmc presents the diagnostic plots for the MCMC algorithm used to estimate the parameters of our model. These plots are essential for assessing the convergence of the sampling process and ensuring the reliability of the Bayesian estimates.
 
@@ -432,7 +419,6 @@ plot(neg_binomial_model, "rhat")
 ```
 
 \newpage
-
 
 # References
 
