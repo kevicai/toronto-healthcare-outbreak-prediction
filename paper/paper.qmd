@@ -7,6 +7,7 @@ date: today
 date-format: long
 abstract: "This study investigates the factors influencing the duration of infectious disease outbreaks in healthcare institutions in Toronto, focusing on the role of outbreak setting, causative agent, and seasonal variations. Using a Bayesian negative binomial regression model, the analysis identifies significant drivers of outbreak duration and highlights the importance of targeted preparedness in settings like Long-Term Care Homes (LTCHs) and Retirement Homes. The findings suggest that COVID-19 has a substantial impact on outbreak duration compared to other respiratory viruses. This research underscores the need for robust healthcare infrastructure and adaptive strategies to manage future healthcare outbreaks effectively."
 format: pdf
+toc: true
 number-sections: true
 execute: 
   cache: true
@@ -203,13 +204,11 @@ ggplot(data, aes(x = as.factor(month), y = duration)) +
   labs(
     x = "Month",
     y = "Duration (days)",
-    title = "Duration of Outbreaks Across Months"
   ) +
   theme_minimal() +
   theme(
     axis.text = element_text(size = 8),
     axis.title = element_text(size = 10),
-    plot.title = element_text(size = 12, face = "bold")
   )
 ```
 
@@ -347,7 +346,7 @@ One limitation of this analysis is the reliance on available outbreak data, whic
 
 Future research could enhance this study by incorporating more detailed data, including healthcare interventions and patient information. Exploring the interaction between predictors like outbreak setting, causative agent, and seasonal trends could provide deeper insights into outbreak dynamics. The model also does not incorporate the potential influence of COVID-19 vaccinations on outbreak duration, an important factor that could have significantly altered the course of outbreaks, particularly in healthcare settings. Further research could explore the role of vaccination coverage and its interaction with other variables to improve predictive accuracy.
 
-# Appendix {-}
+# Appendix {sec-appendix}
 
 ## Model details
 
@@ -417,6 +416,122 @@ plot(neg_binomial_model, "trace", pars = c("(Intercept)", "outbreak_settingLTCH"
 
 plot(neg_binomial_model, "rhat")
 ```
+
+## Idealized Survey
+### Introduction
+Thank you for participating in this survey! We are collecting data from healthcare workers to better understand infectious disease outbreaks in healthcare institutions. Your responses will help inform strategies for improving outbreak management and preparedness. 
+
+The survey is expected to take approximately 10 minutes to complete. All responses will be kept confidential and used solely for research purposes.
+
+If you have any questions, please contact:
+
+- **Survey Coordinator**: Kevin Cai  
+- **Email**: [kev.cai@mail.utoronto.ca](mailto:kev.cai@mail.utoronto.ca)
+
+### Survey Questions
+
+#### Section 1: Institutional Information
+
+1. **Institution Name**  
+   Open-ended response:  
+   \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+2. **Institution Address**  
+   Open-ended response:  
+   \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+3. **Outbreak Setting** (Select one):  
+   - Hospital - Acute Care  
+   - Hospital - Chronic Care  
+   - Hospital - Psychiatric  
+   - Long-Term Care Home (LTCH)  
+   - Retirement Home  
+   - Other: \_\_\_\_\_\_\_\_\_
+
+#### Section 2: Outbreak Information
+
+4. **Type of Outbreak** (Select one):  
+   - Respiratory  
+   - Enteric  
+   - Other: \_\_\_\_\_\_\_\_\_
+
+5. **Primary Causative Agent** (Select one):  
+   - COVID-19  
+   - Influenza  
+   - Norovirus  
+   - Respiratory syncytial virus  
+   - Parainfluenza  
+   - Enterovirus/Rhinovirus  
+   - Metapneumovirus  
+   - Coronavirus (non-COVID)  
+   - Other: \_\_\_\_\_\_\_\_\_
+
+6. **Secondary Causative Agent (if applicable)** (Select one or leave blank):  
+   - COVID-19  
+   - Influenza  
+   - Norovirus  
+   - Respiratory syncytial virus  
+   - Parainfluenza  
+   - Enterovirus/Rhinovirus  
+   - Metapneumovirus  
+   - Coronavirus (non-COVID)  
+   - Other: \_\_\_\_\_\_\_\_\_
+
+#### Section 3: Timeline and Status
+
+7. **Date Outbreak Began**  
+   Date picker: \_\_\_\_\_\_\_\_\_
+
+8. **Date Outbreak Was Declared Over**  
+   Date picker: \_\_\_\_\_\_\_\_\_
+
+9. **Is the Outbreak Currently Active?** (Select one):  
+   - Yes  
+   - No  
+
+#### Section 4: Outbreak Duration and Impact
+
+10. **Duration of Outbreak (in days)**  
+    Open-ended response:  
+    \_\_\_\_\_\_\_\_\_
+
+11. **Did the outbreak require external resources or assistance (e.g., public health interventions)?**  
+    - Yes  
+    - No  
+
+12. **What were the primary challenges faced during this outbreak?** (Select all that apply):  
+    - Staffing shortages  
+    - Supply chain issues (e.g., PPE, medications)  
+    - Limited isolation facilities  
+    - Insufficient training or protocols  
+    - Other: \_\_\_\_\_\_\_\_\_
+
+13. **What mitigation measures were most effective in managing this outbreak?** (Select all that apply):  
+    - Enhanced cleaning and disinfection  
+    - Improved PPE availability  
+    - Isolation/quarantine measures  
+    - Staff education and training  
+    - Rapid diagnostic testing  
+    - Other: \_\_\_\_\_\_\_\_\_
+
+#### Section 5: Feedback and Additional Information
+
+14. **In your opinion, what could have been done differently to reduce the duration of this outbreak?**  
+    Open-ended response:  
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+15. **Do you have additional comments or observations about this outbreak?**  
+    Open-ended response:  
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+### Thank You
+
+Thank you for completing this survey! Your responses will contribute to improving outbreak management strategies in healthcare institutions. 
+
+If you would like to receive updates about this research or a copy of the final report, please provide your email address below (optional):  
+_Email Address:_  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
 
 \newpage
 
