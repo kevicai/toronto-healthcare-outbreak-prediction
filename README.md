@@ -8,7 +8,7 @@ This repo presents a comprehensive analysis of outbreak durations in Toronto hea
 
 The repo is structured as:
 
--   `data/raw_data` contains the raw data as obtained from X.
+-   `data/raw_data` contains the raw data as obtained from OpenDataToronto.
 -   `data/analysis_data` contains the cleaned dataset that was constructed.
 -   `model` contains fitted models. 
 -   `other` contains datasheet, details about LLM chat interactions, and sketches.
